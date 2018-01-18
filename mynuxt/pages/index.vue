@@ -50,19 +50,7 @@
         navs: 'el_navs',
         clear: 'clear',
         active: 0,
-        clas: [{
-          choose: '厨房'
-        }, {
-          choose: '餐厅'
-        }, {
-          choose: '书房'
-        }, {
-          choose: '客厅'
-        }, {
-          choose: '儿童'
-        }, {
-          choose: '户外/阳台'
-        }]
+        clas: []
       }
     },
     async asyncData () {
