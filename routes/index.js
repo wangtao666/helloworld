@@ -1,5 +1,6 @@
 var nuxtSchema = require('../db/nuxtserrver');
 var nuxtlist = nuxtSchema.nuxtlist;
+var tslist = nuxtSchema.tslist;
 /* GET home page. */
 module.exports = function(app) {
     app.get('/', function (req, res) {
@@ -11,7 +12,14 @@ module.exports = function(app) {
 
     app.get('/getall', function (req, res) {
         nuxtlist.find({}, function (err, doc) {
-            console.log('我在getall查询接口！！')
+            console.log('我在getall查询接口！！');
+            res.send(doc)
+        })
+    });
+
+    app.get('/getts', function (req, res) {
+        tslist.find({}, function (err, doc) {
+            console.log('我在查询消息列表接口！！');
             res.send(doc)
         })
     })
