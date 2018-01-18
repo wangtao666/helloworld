@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%=title %></title>
+</head>
+<body>
+<h1><%=title %></h1>
+<% if(data) { %>
+    <h2><%= datas[0].name %></h2>
+    <h2><%= datas[0].money1%></h2>
+    <h2><%= datas[0].money2%></h2>
+    <h2><%= datas[0].money3%></h2>
+<% } else {%>
+    <h2>你是猪吗？</h2>
+<% } %>
+</body>
+</html>

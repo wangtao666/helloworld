@@ -66,6 +66,7 @@
       }
     },
     async asyncData () {
+      // 记得return 不然不会返回结果
       return axios.all([
         axios.get('https://jsonplaceholder.typicode.com/posts'),
         axios.get('http://127.0.0.1:3666/getall')
@@ -77,6 +78,9 @@
              clas: reposResp.data
            }
         }));
+    },
+    created () {
+      console.log('goodss:', this.goodss, 'clas:', this.clas)
     },
     components: { Banner, Times, Btn, Leads },
     mounted () {
