@@ -2,24 +2,38 @@
   <div id="lead">
     <ul :class="choose">
       <li>
-        <nuxt-link to="javascript:">参团</nuxt-link>
+        <div @click="openwin1" ref="0">引导</div>
       </li>
       <li>
-        <nuxt-link to="javascript:">我的团</nuxt-link>
+        <div @click="openwin1" ref="1">参团</div>
       </li>
       <li>
-        <nuxt-link to="/home">去开团</nuxt-link>
+        <div @click="openwin1" ref="2">我的团</div>
       </li>
     </ul>
     <nuxt/>
   </div>
 </template>
 <script>
+
   export default {
     name: 'lead',
     data () {
       return {
         choose: 'el_choose'
+      }
+    },
+    methods: {
+      openwin1: function (e) {
+        console.log('123:',e.target.innerText)
+        if(e.target.innerText == '引导'){
+          this.data1 = true
+          this.data2 = true
+        }else if (e.target.innerText == '参团') {
+          location.href = '/'
+        }else {
+          location.href = '/'
+        }
       }
     }
   }
@@ -42,7 +56,7 @@
     list-style: none;
     background: #fff;
   }
-  .el_choose>li>a {
+  .el_choose>li>a, .el_choose>li>div {
     text-decoration: none;
     color: rgb(0,191,142);
   }

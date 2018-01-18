@@ -1,15 +1,21 @@
 <template>
   <div id="btn">
-    <nuxt-link to="/" :class="btn">去开团</nuxt-link>
+    <div :class="btn" @click="gokt">去开团</div>
     <nuxt/>
   </div>
 </template>
 <script>
+
   export default {
     name: 'btn',
     data () {
       return {
         btn: 'el_btn'
+      }
+    },
+    methods: {
+      gokt: function () {
+        location.href = 'home'
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div id="baner">
     <div :class="banner">
-      <div :class="inform">活动详情>></div>
+      <div :class="inform" @click="seeinform">活动详情>></div>
     </div>
     <nuxt/>
   </div>
@@ -13,6 +13,18 @@
       return {
         banner: 'el_banner',
         inform: 'el_inform'
+      }
+    },
+    methods: {
+      seeinform: function () {
+        console.log(this.data1)
+        if(this.data1){
+          this.data1 = false
+          this.data2 = false
+        }else {
+          this.data1 = true
+          this.data2 = true
+        }
       }
     }
   }
