@@ -27,7 +27,7 @@ html,body{
   overflow-x: scroll;
 }
 .el_navs>ul{
-  width: 890px;
+  width: 1000px;
   overflow-x: scroll;
   margin-left: 32px;
 }

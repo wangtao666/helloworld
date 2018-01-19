@@ -19,13 +19,13 @@
     </div>
     <div class="el_nav">
       <div class="el_navs">
-        <ul class="clear">
+        <ul class="clear" ref="mybox">
           <li :class="{active: active == index}" @click="check(index)" v-for="(item, index) in clas" :key="index">{{ item.choose }}</li>
         </ul>
       </div>
     </div>
     <div class="el_content">
-      <div class="el_goods" v-for="(item, index) in goodss" :key="index">
+      <div class="el_goods" v-for="(item, index) in goodss" :key="index" @click="goDetail">
         <div class="el_img">
           <img src="/images/prompt.png" alt=""/>
         </div>
@@ -69,7 +69,19 @@
     methods: {
       check: function (e) {
         this.active = e
+      },
+      goDetail: function () {
+        location.href = '/groupDetails'
       }
+    },
+    mounted () {
+      let self = this
+      let elWidth = 0
+      let lis = self.$refs.mybox.children
+      for (var i = 0; i < lis.length; i++) {
+        elWidth += lis[i].clientWidth
+      }
+      self.$refs.mybox.style.width = elWidth + 30 + 'px'
     },
     async asyncData () {
       return axios.all([

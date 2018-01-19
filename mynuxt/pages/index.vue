@@ -12,7 +12,7 @@
       </ul>
     </div>
     <div id="goods">
-      <div v-for="(item, index) in goodss" :class="goods">
+      <div v-for="(item, index) in goodss" :class="goods" @click="goDetail">
         <div :class="imgs">
           <img src="/images/prompt.png" alt="">
         </div>
@@ -130,7 +130,7 @@
       for (var i = 0; i < lis.length; i++) {
         elWidth += lis[i].clientWidth
       }
-      self.$refs.mybox.style.width = elWidth + 60 + 'px'
+      self.$refs.mybox.style.width = elWidth + 30 + 'px'
       // 设置窗口2为居中
       self.$refs.dailog.children[0].style.left = win1lt + 'px'
       self.$refs.dailog.children[0].style.top = win2tp + 'px'
@@ -167,6 +167,9 @@
       },
       cantuan: function () {
         location.href = 'participate'
+      },
+      goDetail: function () {
+        location.href = 'groupDetails'
       }
     }
 }
