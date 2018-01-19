@@ -18,10 +18,10 @@
     methods: {
       seeinform: function () {
         console.log(this.data1)
-        if(this.data1){
+        if (this.data1) {
           this.data1 = false
           this.data2 = false
-        }else {
+        } else {
           this.data1 = true
           this.data2 = true
         }

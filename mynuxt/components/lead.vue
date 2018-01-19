@@ -25,13 +25,13 @@
     },
     methods: {
       openwin1: function (e) {
-        console.log('123:',e.target.innerText)
-        if(e.target.innerText == '引导'){
+        console.log('123:', e.target.innerText)
+        if (e.target.innerText === '引导') {
           this.data1 = true
           this.data2 = true
-        }else if (e.target.innerText == '参团') {
+        } else if (e.target.innerText === '参团') {
           location.href = '/'
-        }else {
+        } else {
           location.href = '/'
         }
       }

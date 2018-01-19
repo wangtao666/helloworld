@@ -27,9 +27,9 @@
     async asyncData () {
       return axios.get('http://127.0.0.1:3666/getts')
         .then((res) => {
-           console.log(res.data[0])
+          console.log(res.data[0])
           return {
-             ts: res.data[0]
+            ts: res.data[0]
           }
         })
     },
