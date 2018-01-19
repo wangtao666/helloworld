@@ -55,13 +55,13 @@
     <div id="lead">
       <ul :class="choose">
         <li>
-          <div @click="openwin1" ref="0">引导</div>
+          <div @click="openwin1">引导</div>
         </li>
         <li>
-          <div @click="openwin1" ref="1">参团</div>
+          <div @click="openwin1">参团</div>
         </li>
         <li>
-          <div @click="openwin1" ref="2">我的团</div>
+          <div @click="openwin1">我的团</div>
         </li>
       </ul>
       <nuxt/>
@@ -114,6 +114,11 @@
     created () {
 //      console.log('goodss:', this.goodss, 'clas:', this.clas)
     },
+    head () {
+      return {
+        title: '拼团购'
+      }
+    },
     components: { Banner, Times, Btn },
     mounted () {
       let self = this
@@ -152,7 +157,7 @@
           this.data1 = true
           this.data2 = true
         }else if (e.target.innerText == '参团') {
-          location.href = '/'
+          location.href = 'participate'
         }else {
           location.href = '/'
         }
@@ -161,7 +166,7 @@
         location.href = "success"
       },
       cantuan: function () {
-
+        location.href = "participate"
       }
     }
 }
