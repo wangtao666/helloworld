@@ -66,12 +66,14 @@
       </ul>
       <nuxt/>
     </div>
+    <Load v-show="isShow"></Load>
   </div>
 </template>
 <script>
   import Banner from '../components/banner'
   import Times from '../components/times'
   import Btn from '../components/button'
+  import Load from '../components/load'
 //  import request from '../static/api/request'
   import axios from 'axios'
   export default {
@@ -94,7 +96,8 @@
         data3: false,
         banner: 'el_banner',
         inform: 'el_inform',
-        choose: 'el_choose'
+        choose: 'el_choose',
+        isShow: true
       }
     },
     async asyncData () {
@@ -119,7 +122,7 @@
         title: '拼团购'
       }
     },
-    components: { Banner, Times, Btn },
+    components: { Banner, Times, Btn, Load },
     mounted () {
       let self = this
       let elWidth = 0
@@ -137,6 +140,9 @@
       // 设置窗口1为居中
       self.$refs.dailog.children[1].style.left = win1lt + 'px'
       self.$refs.dailog.children[1].style.top = win1tp + 'px'
+      setTimeout(function () {
+        self.isShow = false
+      }, Math.random() * 2000)
     },
     methods: {
       check: function (e) {
