@@ -15,15 +15,15 @@
 		  data () {
 		      return {
 		      }
-		  },     
+		  },
 		    methods:{
-		    	
-		    	
+
+
 		    }
     }
 </script>
 
 <style>
-@import "../../static/css/base.css";	
+@import "../../assets/css/base.css";
 @import "../../static/css/myGroups.css";
 </style>

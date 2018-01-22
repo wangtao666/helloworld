@@ -16,9 +16,9 @@
                         </p>
                          <p class="groupHead" v-else>
                               <i class="g-red">团长：贾小燕</i>
-                                                                   
+
                         </p>
-                        
+
                     </div>
                 </div>
                 <section class="msgSign borderBox" v-if="hide">成功邀约510人购买享受6折优惠/团内消费达到1000元享3折优
@@ -60,15 +60,15 @@ export default {
 		      return {
 //		      	hide:false
 		      }
-		  },     
+		  },
 		    methods:{
-		    	
-		    	
+
+
 		    }
-    }	
+    }
 </script>
 
 <style>
-@import "../../static/css/base.css";	
+@import "../../assets/css/base.css";
 @import "../../static/css/myGroups.css";
 </style>

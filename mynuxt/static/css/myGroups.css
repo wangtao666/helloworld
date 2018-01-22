@@ -227,7 +227,7 @@
     width: 42px;
     height: 36px;
     content:'';
-    background: url("../images/Shape2x.png") no-repeat center;
+    background: url("../../assets/images/Shape2x.png") no-repeat center;
     position: absolute;
     top:18px;
     left:calc((98px - 42px)/2);
@@ -237,7 +237,7 @@
     width: 42px;
     height: 40px;
     content:'';
-    background: url("../images/icon22x.png") no-repeat center;
+    background: url("../../assets/images/icon22x.png") no-repeat center;
     position: absolute;
     top:18px;
     left:calc((98px - 42px)/2);
@@ -283,7 +283,7 @@
 .d_switch a{height: 60px;line-height: 60px;background: #f5f5fa;width:100%;}
 .d_switch a.cur{color: #999999;}
 .d_switch:after{display:none}
-.d_switch a:before{ content: "";  display: inline-block;  width: 32px;  height: 32px;  background-image: url(../images/imgs.png);  position: relative;  left: -14px;  top:6px;}
+.d_switch a:before{ content: "";  display: inline-block;  width: 32px;  height: 32px;  background-image: url(../../assets/images/imgs.png);  position: relative;  left: -14px;  top:6px;}
 .d_switch a.cur:after, .d_switch a:hover:after{display:none;}
 .d_btg_des{border-bottom: none}
 #wrap{margin-bottom: 96px;}

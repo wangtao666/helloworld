@@ -1,11 +1,11 @@
 <template>
 	<div class="wrap">
     <header class="headerImg">
-        <img src="../static/images/logo.png" alt=""/>
+        <img src="../assets/images/logo.png" alt=""/>
     </header>
     <section>
         <div class="noImg">
-            <img src="../static/images/prompt.png" alt=""/>
+            <img src="../assets/images/prompt.png" alt=""/>
         </div>
         <p class="noTxt">你好，你目前没有</p>
 
@@ -21,7 +21,7 @@
 </script>
 
 <style scoped>
-	@import "../static/css/base.css";
+	@import "../assets/css/base.css";
 	.wrap{
     height: 100%;
     width: 100%;
