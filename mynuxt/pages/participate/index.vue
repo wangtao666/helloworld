@@ -75,6 +75,7 @@
       let self = this
       this.$refs.dailog.style.left = elWidth + 'px'
       this.$refs.dailog.style.top = elHeight + 'px'
+      //加载动画
       setTimeout(function () {
         self.isShow = false
         filter.flter('participate')

@@ -45,6 +45,7 @@
     components: { Load },
     mounted () {
       let self = this
+      //加载动画
       setTimeout(function () {
         self.isShow = false
         filter.flter('success')

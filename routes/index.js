@@ -1,6 +1,16 @@
 var nuxtSchema = require('../db/nuxtserrver');
 var nuxtlist = nuxtSchema.nuxtlist;
 var tslist = nuxtSchema.tslist;
+var Mock = require('mockjs');
+var Random = Mock.Random;
+
+var data = Mock.mock({
+    'list|1-10': [{
+        'choose|+1': 1
+    }]
+});
+
+
 /* GET home page. */
 module.exports = function(app) {
     app.get('/', function (req, res) {
@@ -15,6 +25,31 @@ module.exports = function(app) {
             console.log('我在getall查询接口！！');
             res.send(doc)
         })
+    });
+
+    //获得图片的地址(mockjs)
+    app.get('/geturl', function (req, res) {
+        var url = [];
+        var timeId = setInterval(function () {
+            var aa = Random.image('750x750', Random.color(), '#FFF', 'png', 'heheda');
+            url.push({'url': aa});
+            if(url.length > 10){
+                clearInterval(timeId);
+                //第一个参数是数据  第二个不知道  第三个代表缩进多少
+                url = JSON.stringify(url, null, 1);
+            }
+        },50);
+        setTimeout(function () {
+            console.log('我要发送图片地址了！！')
+            res.send(url)
+        },1000)
+    });
+    //获得文字(mockjs)
+    app.get('/gettext', function (req, res) {
+       var istext = Random.ctitle(3, 30)
+        setTimeout(function () {
+            res.send(istext);
+        },500)
     });
 
     app.get('/getts', function (req, res) {

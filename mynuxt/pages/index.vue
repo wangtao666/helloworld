@@ -141,6 +141,7 @@
       // 设置窗口1为居中
       self.$refs.dailog.children[1].style.left = win1lt + 'px'
       self.$refs.dailog.children[1].style.top = win1tp + 'px'
+      //加载动画
       setTimeout(function () {
         self.isShow = false
         filter.flter('box')

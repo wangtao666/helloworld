@@ -5,19 +5,16 @@
       <a class="link_btn r" src="#">进入商城</a>
     </div>
 
-    <!--滚动 banner-->
-    <div class="swiper-container" style="height:750px;">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="/images/lay_load.png" url="">
-        </div>
-      </div>
-    </div>
+    <el-carousel indicator-position="outside" height="750px">
+      <el-carousel-item v-for="(item, index) in imgurl" :key="index">
+        <img :src=" item.url " alt="">
+      </el-carousel-item>
+    </el-carousel>
 
     <!--商品的名字 价格 prize-->
     <div class="goodInfo">
       <div class="goodInfoName borderBox">
-        全友家居卧室套房罗满妮玫瑰系列法式乡村四门衣柜65907
+        {{ istext }}
       </div>
       <div class="infoPrize">
         <span class="">拼团价:￥<i class="size44">520</i></span>
@@ -74,19 +71,34 @@
   </div>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     data () {
       return {
-
+        imgurl: [],
+        istext: ''
       }
     },
     head () {
       return {
         title: '拼团购详情页'
       }
+    },
+    async asyncData () {
+      return axios.all([
+        axios.get('http://127.0.0.1:3666/geturl'),
+        axios.get('http://127.0.0.1:3666/gettext')
+      ])
+      .then(axios.spread(function (url, texts) {
+        return {
+          imgurl: url.data,
+          istext: texts.data
+        }
+      }))
     }
   }
 </script>
 <style>
   @import "~assets/css/myGroups.css";
+
 </style>
