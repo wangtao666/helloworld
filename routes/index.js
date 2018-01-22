@@ -37,19 +37,15 @@ module.exports = function(app) {
                 clearInterval(timeId);
                 //第一个参数是数据  第二个不知道  第三个代表缩进多少
                 url = JSON.stringify(url, null, 1);
+                console.log('我要发送图片地址了！！')
+                res.send(url)
             }
         },50);
-        setTimeout(function () {
-            console.log('我要发送图片地址了！！')
-            res.send(url)
-        },1000)
     });
     //获得文字(mockjs)
     app.get('/gettext', function (req, res) {
-       var istext = Random.ctitle(3, 30)
-        setTimeout(function () {
-            res.send(istext);
-        },500)
+       var istext = Random.ctitle(3, 30);
+        res.send(istext);
     });
 
     app.get('/getts', function (req, res) {
