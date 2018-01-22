@@ -14,14 +14,18 @@
       <p>温馨提示:</p>
       <p>{{ ts.tishi }}</p>
     </div>
+    <Load v-show="isShow"></Load>
   </div>
 </template>
 <script>
   import axios from 'axios'
+  import Load from '../../components/load'
+  import filter from '../../assets/js/filter'
   export default {
     data () {
       return {
-        ts: {}
+        ts: {},
+        isShow: true
       }
     },
     async asyncData () {
@@ -37,6 +41,14 @@
       return {
         title: '拼团抢福利'
       }
+    },
+    components: { Load },
+    mounted () {
+      let self = this
+      setTimeout(function () {
+        self.isShow = false
+        filter.flter('success')
+      }, Math.random() * 2000)
     }
   }
 </script>
@@ -49,9 +61,13 @@
     width: 750px;
     height: 300px;
     padding: 64px 0px 0px 40px;
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
   }
   .el_img2{
     height: 368px;
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
   }
   .el_img2>img{
     width: 300px;
@@ -62,6 +78,8 @@
   .el_prompt{
     text-align: center;
     padding-bottom: 170px;
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
   }
   .el_prompt>p{
     font-size: 30px;
@@ -74,6 +92,8 @@
     font-size: 26px;
     color: rgb(153,153,153);
     margin-left: 40px;
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
   }
   .el_end>p{
     margin-top: 24px;

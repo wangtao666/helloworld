@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="participate">
   <div class="el_choose">选择团长，参团吧</div>
   <div class="el_content">
     <div class="el_goods" v-for="(item, index) in goodss">
@@ -33,15 +33,19 @@
       </div>
     </div>
   </div>
+  <Load v-show="isShow"></Load>
 </div>
 </template>
 <script>
   import axios from 'axios'
+  import Load from '../../components/load'
+  import filter from '../../assets/js/filter'
   export default {
     data () {
       return {
         goodss: [],
-        data1: false
+        data1: false,
+        isShow: true
       }
     },
     async asyncData () {
@@ -68,14 +72,20 @@
     mounted () {
       let elWidth = (window.innerWidth - 605) / 2
       let elHeight = (window.innerHeight - 358) / 2
+      let self = this
       this.$refs.dailog.style.left = elWidth + 'px'
       this.$refs.dailog.style.top = elHeight + 'px'
+      setTimeout(function () {
+        self.isShow = false
+        filter.flter('participate')
+      }, Math.random() * 2000)
     },
     head () {
       return {
         title: '拼团抢福利'
       }
-    }
+    },
+    components: { Load }
 }
 </script>
 <style>

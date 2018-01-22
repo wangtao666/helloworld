@@ -74,6 +74,7 @@
   import Times from '../components/times'
   import Btn from '../components/button'
   import Load from '../components/load'
+  import filter from '../assets/js/filter'
 //  import request from '../static/api/request'
   import axios from 'axios'
   export default {
@@ -142,6 +143,7 @@
       self.$refs.dailog.children[1].style.top = win1tp + 'px'
       setTimeout(function () {
         self.isShow = false
+        filter.flter('box')
       }, Math.random() * 2000)
     },
     methods: {

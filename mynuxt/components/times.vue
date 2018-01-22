@@ -30,6 +30,8 @@ export default {
   .el_timeall {
     padding: 18px 28px 18px 0;
     float: right;
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
   }
   .el_timeTxt {
     display: inline-block;

@@ -30,6 +30,8 @@
     bottom: 0px;
     border-top: 1px solid rgb(217,217,217);
     background: #fff;
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
   }
   .el_btn {
     display: block;

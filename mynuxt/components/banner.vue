@@ -30,6 +30,10 @@
   }
 </script>
 <style>
+  #baner{
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
+  }
   .el_banner{
     width: 750px;
     height: 230px;
