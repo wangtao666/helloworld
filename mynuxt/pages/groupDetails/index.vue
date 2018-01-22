@@ -35,7 +35,7 @@
     <!--物流模板-->
     <div id="delivery">
       <p>
-        <img src="/images/icon2x.png" alt="勾勾">
+        <img src="../../assets/images/icon2x.png" alt="勾勾">
         <span>商家运费规则<input type="hidden" id="deliveryFreightShow" value="02"></span>
       </p>
       <div class="ico">

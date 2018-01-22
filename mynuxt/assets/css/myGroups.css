@@ -238,7 +238,7 @@
     width: 42px;
     height: 36px;
     content:'';
-    background: url("/images/Shape2x.png") no-repeat center;
+    background: url("../../assets/images/Shape2x.png") no-repeat center;
     position: absolute;
     top:18px;
     left:calc((98px - 34px)/2);
@@ -248,7 +248,7 @@
     width: 42px;
     height: 40px;
     content:'';
-    background: url("/images/icon22x.png") no-repeat center;
+    background: url("../../assets/images/icon22x.png") no-repeat center;
     position: absolute;
     top:16px;
     left:calc((98px - 34px)/2);
@@ -361,7 +361,7 @@
   height: 30px;
   display: block;
   position: absolute;
-  background: url(/images/icon.png) no-repeat;
+  background: url(../../assets/images/icon.png) no-repeat;
   background-position: -50px -50px;
   top: 3px;
   bottom: 0;
@@ -416,7 +416,7 @@ body, button, input, select, textarea {
   margin-bottom: 96px;
 }
 .icon_img, .fix-bottom-buy .car:after, .cus-name .link_name:before, .top_input a.search:after, .index_discount a.search:after, .swiper-container .control a.share:after, .p_banner_box .control a.share:after, .p_banner_box .control a.collect:after, .swiper-container .control a.collect:after, .sp_focus .hot:after, .sp_focus .focus_prize .car_ico, .fix-bottom-nav a:after, .spxq_type_2 .arrow span, .spxq_type_2 .status span.share:after, .spxq_type_2 .status span.collect:before, .spxq_property:after, .property_select .close, .property_select .property p span.cur:after, .float_nav a span.n2:after, .float_nav a.gwc:after, .float_nav a.sy:after, .float_nav a.tjsp:after, .float_nav a.splb:after, .float_nav a.ddzx:after, .float_nav a.dt:after, .ddzx_my_top a.n1 span:after, .ddzx_my_top a.n2 span:after, .business_info p.phone:before, .business_info p.address:before, .dfh-box .info a:before, .dfh-box .id span:before, .dfh-box .id span:after, .dfh-box .toggle:after, .ddxq-sp-name a:before, .splb_top a.search:after, .splb_top .x b, .splb_top .select:before, .splb_top .select .switch a:before, .splb_top .select:after, .home_icon:before {
-  background: url(/images/icon.png) no-repeat;
+  background: url(../../assets/images/icon.png) no-repeat;
 }
 .d_switch a.cur:after, .d_switch a:hover:after {
   content: '';
@@ -507,14 +507,14 @@ a {
   height: 48px;
   content: '';
   display: block;
-  background-image: url("/images/right.png");
+  background-image: url("../../assets/images/right.png");
 }
 .el-icon-arrow-left:before {
   width: 48px;
   height: 48px;
   content: '';
   display: block;
-  background-image: url("/images/left.png");
+  background-image: url("../../assets/images/left.png");
 }
 .demo-block {
   border: 1px solid #ebebeb;

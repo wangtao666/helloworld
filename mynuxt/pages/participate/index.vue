@@ -4,7 +4,7 @@
   <div class="el_content">
     <div class="el_goods" v-for="(item, index) in goodss">
       <div class="el_img">
-        <img src="/images/prompt.png" alt="">
+        <img src="../../assets/images/prompt.png" alt="">
       </div>
       <div class="el_bewrite">
         <ul>

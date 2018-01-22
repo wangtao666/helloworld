@@ -160,7 +160,7 @@ html,body{
   float: left;
   margin-left: 27px;
   margin-right: 24px;
-  background-image: url("/images/prompt.png");
+  background-image: url("../../assets/images/prompt.png");
   background-repeat: round;
 }
 .el_jion{

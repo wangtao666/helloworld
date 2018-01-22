@@ -43,7 +43,7 @@
   .loading-page>p{
     width: 300px;
     height: 300px;
-    background-image: url("/images/timg.gif");
+    background-image: url("../assets/images/timg.gif");
     background-repeat: round;
     text-align: center;
     padding-top: 260px;

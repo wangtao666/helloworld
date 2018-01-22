@@ -1,10 +1,10 @@
 <template>
   <div id="success">
     <div class="el_logo">
-      <img src="/images/logo.png" alt=""/>
+      <img src="../../assets/images/logo.png" alt=""/>
     </div>
     <div class="el_img2">
-      <img src="/images/prompt.png" alt=""/>
+      <img src="../../assets/images/prompt.png" alt=""/>
     </div>
     <div class="el_prompt">
       <p>组团成功啦！</p>

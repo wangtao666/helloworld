@@ -14,7 +14,7 @@
     <div id="goods">
       <div v-for="(item, index) in goodss" :class="goods" @click="goDetail">
         <div :class="imgs">
-          <img src="/images/prompt.png" alt="">
+          <img src="../assets/images/prompt.png" alt="">
         </div>
         <div :class="bewrite">
           <ul>
@@ -168,7 +168,7 @@
         } else if (e.target.innerText === '参团') {
           location.href = 'participate'
         } else {
-          location.href = '/'
+          location.href = '/myGroups/fightGroups'
         }
       },
       gotuan: function () {
