@@ -1,4 +1,4 @@
-function  flter(obj) {
+function  flter(obj, pd) {
   let chid = document.getElementById(obj).children
   let chids = []
   for (var i = 0; i<chid.length; i++) {
@@ -6,7 +6,11 @@ function  flter(obj) {
       chids.push(chid[i])}
   }
   for (var x = 0; x<chids.length; x++) {
-    chids[x].style.filter = 'blur(0px)'
+    if (pd) {
+      chids[x].style.filter = 'blur(15px)'
+    } else {
+      chids[x].style.filter = 'blur(0px)'
+    }
   }
 }
 export default {
