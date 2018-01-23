@@ -2,15 +2,9 @@
 	<div>
 		<groups :isA='isA' :isB='isB' />
 		<section class="groups">
-			<div class="everyGroups borderBox">
-				<a class="borderBox groupsCur" @click="toggleTab('underWay',$event)" href="javascript:;">参团进行中</a>
-			</div>
-			<div class="everyGroups borderBox">
-				<a class=" borderBox" @click="toggleTab('offeredSuccess',$event)" href="javascript:;">参团成功</a>
-			</div>
-			<div class="everyGroups borderBox">
-				<a class=" borderBox" @click="toggleTab('collageFailure',$event)" href="javascript:;">参团失败</a>
-			</div>
+      <div class="everyGroups borderBox" v-for="(item,$index) in groupsData">
+        <a class="borderBox" :class="{groupsCur: $index==indexGroup}"   @click="toggleTab(item.group, $index)" href="javascript:;">{{item.name}}</a>
+      </div>
 		</section>
 		<div class="content">
 
@@ -39,13 +33,19 @@
 				isA: false,
 				isB: true,
 				currentTab: 'underWay',
-			
+        groupsData:[
+          {"name":"参团进行中","group":"underWay"},
+          {"name":"参团成功","group":"offeredSuccess"},
+          {"name":"参团失败","group":"collageFailure"}
+        ],
+        "indexGroup":"0"
+
 			}
 		},
 		methods: {
-			toggleTab(tab, $event) {
-				$($event.target).addClass("groupsCur").parent().siblings().children().removeClass('groupsCur'); //当前的tab
-				this.currentTab = tab; // tab 为当前触发标签页的组件名
+			toggleTab(tab, $index) {
+        this.currentTab = tab;
+        this.indexGroup = $index;
 			}
 		}
 
