@@ -5,6 +5,7 @@
       <div class="everyGroups borderBox" v-for="(item,$index) in groupsData">
         <a class="borderBox" :class="{groupsCur: $index==indexGroup}"   @click="toggleTab(item.group, $index)" href="javascript:;">{{item.name}}</a>
       </div>
+      </section>
 		<div class="content">
 			<!--子组件，显示不同的 tab   is 特性动态绑定子组件    keep-alive 将切换出去的组件保留在内存中-->
 			<!--拼团进行中-->
