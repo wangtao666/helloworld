@@ -51,7 +51,7 @@
         <p></p>
       </div>
     </div>
-    <Btn></Btn>
+    <Btn :show2="show2"></Btn>
     <div id="lead">
       <ul :class="choose">
         <li>
@@ -98,7 +98,8 @@
         banner: 'el_banner',
         inform: 'el_inform',
         choose: 'el_choose',
-        isShow: true
+        isShow: true,
+        show2: true
       }
     },
     async asyncData () {

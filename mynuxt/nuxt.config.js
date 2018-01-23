@@ -37,21 +37,19 @@ module.exports = {
   */
   vender: [
     'axios',
-    'element-ui'
+    'mint-ui'
   ],
   babel:{
     "plugins": [["component", [
       {
-        "libraryName": "element-ui",
-        "styleLibraryName": "theme-default"
-      },
-      'transform-async-to-generator',
-      'transform-runtime'
+        "libraryName": "mint-ui",
+        "style": true
+      }
     ]]],
     comments: true
   },
   plugins: [
-    { src: './plugins/element-ui', ssr: true }
+    { src: './plugins/mint-ui', ssr: true }
   ],
   css:[
     'assets/main.css'

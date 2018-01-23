@@ -5,11 +5,11 @@
       <a class="link_btn r" src="#">进入商城</a>
     </div>
 
-    <el-carousel indicator-position="outside" height="750px">
-      <el-carousel-item v-for="(item, index) in imgurl" :key="index">
-        <img :src=" item.url " alt="">
-      </el-carousel-item>
-    </el-carousel>
+    <mt-swipe :auto="3000" :prevent="true" v-show="isShow2">
+      <mt-swipe-item v-for="(item, index) in imgurl" :key="index" :class="active">
+        <img :src=" item.url ">
+      </mt-swipe-item>
+    </mt-swipe>
 
     <!--商品的名字 价格 prize-->
     <div class="goodInfo">
@@ -68,15 +68,22 @@
         <a class="fightGroup" href="#">去拼团</a>
       </div>
     </div>
+    <Load v-show="isShow"></Load>
   </div>
 </template>
 <script>
   import axios from 'axios'
+  import filter from '../../assets/js/filter'
+  import Load from '../../components/load'
+
   export default {
     data () {
       return {
         imgurl: [],
-        istext: ''
+        istext: '',
+        isShow: true,
+        active: 'is-active',
+        isShow2: false
       }
     },
     head () {
@@ -95,10 +102,27 @@
           istext: texts.data
         }
       }))
+    },
+    components: { Load },
+    mounted () {
+      let self = this
+      //加载动画
+      filter.flter('wrap', true)
+      self.isShow2 = true
+      setTimeout(function () {
+        self.isShow = false
+        filter.flter('wrap', false)
+      }, Math.random() * 3000)
     }
   }
 </script>
 <style>
   @import "~assets/css/myGroups.css";
-
+  .page-swipe .mint-swipe {
+    height: 200px;
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 </style>

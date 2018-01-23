@@ -294,7 +294,7 @@
 .d_switch a{height: 60px;line-height: 60px;background: #f5f5fa;width:100%;text-align: center;display: inline-block}
 .d_switch a.cur{color: #999999;}
 .d_switch:after{display:none}
-.d_switch a:before{ content: "";  display: inline-block;  width: 32px;  height: 32px;  background-image: url(/images/imgs.png);  position: relative;  left: -14px;  top:6px;}
+.d_switch a:before{ content: "";  display: inline-block;  width: 32px;  height: 32px;  background-image: url(../images/imgs.png);  position: relative;  left: -14px;  top:6px;}
 .d_switch a.cur:after, .d_switch a:hover:after{display:none;}
 .d_btg_des{border-bottom: none}
 

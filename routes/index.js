@@ -37,7 +37,7 @@ module.exports = function(app) {
                 clearInterval(timeId);
                 //第一个参数是数据  第二个不知道  第三个代表缩进多少
                 url = JSON.stringify(url, null, 1);
-                console.log('我要发送图片地址了！！')
+                console.log('我要发送图片地址了！！', url)
                 res.send(url)
             }
         },50);

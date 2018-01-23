@@ -1,6 +1,6 @@
 <template>
   <div id="btn">
-    <div :class="btn" @click="gokt">去开团</div>
+    <div :class="btn" @click="gokt" v-show="show2">去开团</div>
     <nuxt/>
   </div>
 </template>
@@ -8,6 +8,7 @@
 
   export default {
     name: 'btn',
+    props: ["show2"],
     data () {
       return {
         btn: 'el_btn'
@@ -17,6 +18,9 @@
       gokt: function () {
         location.href = 'home'
       }
+    },
+    mounted () {
+      console.log('222222222222:', this.show2)
     }
   }
 </script>
