@@ -37,7 +37,8 @@ module.exports = {
   */
   vender: [
     'axios',
-    'mint-ui'
+    'mint-ui',
+    './assets/js/base.js'
   ],
   babel:{
     "plugins": [["component", [
@@ -49,7 +50,8 @@ module.exports = {
     comments: true
   },
   plugins: [
-    { src: './plugins/mint-ui', ssr: true }
+    { src: './plugins/mint-ui', ssr: true },
+    { src: './assets/js/base.js', ssr: false  }
   ],
   css:[
     'assets/main.css'
