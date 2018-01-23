@@ -37,7 +37,8 @@ module.exports = {
   */
   vender: [
     'axios',
-    'element-ui'
+    'element-ui',
+    './assets/js/base.js'
   ],
   babel:{
     "plugins": [["component", [
@@ -51,7 +52,8 @@ module.exports = {
     comments: true
   },
   plugins: [
-    { src: './plugins/element-ui', ssr: true }
+    { src: './plugins/element-ui', ssr: true },
+    { src: './assets/js/base.js', ssr: false  }
   ],
   css:[
     'assets/main.css'
