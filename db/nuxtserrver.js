@@ -10,11 +10,6 @@ var Schema = mongoose.Schema;
 //表 nuxt
 var nuxtlistScheMa = new Schema({
     name: String,
-    money1: String,
-    money2: String,
-    money3: String,
-    user: String,
-    password: String,
     choose: String
 });
 //表tishi

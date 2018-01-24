@@ -8,7 +8,7 @@
     <Times></Times>
     <div :class="navs" id="navs">
       <ul :class="clear" ref="mybox">
-        <li :class="{active: active == index}" @click="check(index)" v-for='(item, index) in clas' :key="index">{{ item.choose }}</li>
+        <li :class="{active: active == index}" @click="check(index, item.attr)" v-for='(item, index) in clas' :key="index">{{ item.name }}</li>
       </ul>
     </div>
     <div id="goods">
@@ -27,7 +27,7 @@
               拼团价：
               <span>￥</span>
               <span>{{ item.id }}</span>
-              <span>市场价:<span>￥{{ item.body.slice(0, 1) }}</span></span>
+              <span>市场价:<span>￥{{ item.body}}</span></span>
             </li>
           </ul>
         </div>
@@ -99,25 +99,35 @@
         inform: 'el_inform',
         choose: 'el_choose',
         isShow: true,
-        show2: true
+        show2: true,
+        goodss: [],
+        alldata: []
       }
     },
     async asyncData () {
       // 记得return 不然不会返回结果
       return axios.all([
-        axios.get('https://jsonplaceholder.typicode.com/posts'),
         axios.get('http://127.0.0.1:3666/getall')
       ])
-        .then(axios.spread(function (userResp, reposResp) {
-          // 上面两个请求都完成后，才执行这个回调方法
+        .then(axios.spread(function (reposResp) {
+          let names = [];
+          // 获得所有对象的名称
+          for(let name in reposResp.data) {
+            names.push(name)
+          }
+          // 上面请求都完成后，才执行这个回调方法
           return {
-            goodss: userResp.data.slice(0, 20),
-            clas: reposResp.data
+            // 头部导航内容
+            clas: reposResp.data.choose,
+            // 取索引为1的对象默认展示
+            goodss: reposResp.data[names[1]],
+            // 所有数据记录一下
+            alldata: reposResp.data
           }
         }))
     },
     created () {
-//      console.log('goodss:', this.goodss, 'clas:', this.clas)
+//      console.log('clas:', this.alldata)
     },
     head () {
       return {
@@ -149,8 +159,10 @@
       }, Math.random() * 2000)
     },
     methods: {
-      check: function (e) {
+      check: function (e, att) {
         this.active = e
+        // 属性不能用点的，要data[att]这样调用！！！！！！坑！ 因为所有数据都已经请求过来了，所以直接用，不用再发请求!!!
+        this.goodss = this.alldata[att]
       },
       seeinform: function () {
         this.data1 = true

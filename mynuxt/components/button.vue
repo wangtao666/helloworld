@@ -16,7 +16,7 @@
     },
     methods: {
       gokt: function () {
-        location.href = 'home'
+        location.href = 'success'
       }
     },
     mounted () {
