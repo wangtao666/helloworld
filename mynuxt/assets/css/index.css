@@ -9,20 +9,27 @@ html,body{
 #__nuxt, #__nuxt>div, #box{
   height: 100%;
 }
+#box{
+  position: relative;
+}
+#box>div{
+  /*filter: blur(15px);*/
+  /*-webkit-filter: blur(15px);*/
+}
 #baner{
-  filter: blur(15px);
-  -webkit-filter: blur(15px);
+  /*filter: blur(15px);*/
+  /*-webkit-filter: blur(15px);*/
 }
 #lead{
-  filter: blur(15px);
-  -webkit-filter: blur(15px);
+  /*filter: blur(15px);*/
+  /*-webkit-filter: blur(15px);*/
 }
 .el_navs {
   width: 750px;
   overflow-x: scroll;
   border-bottom: 1px solid #e3e3e3;
-  filter: blur(15px);
-  -webkit-filter: blur(15px);
+  /*filter: blur(15px);*/
+  /*-webkit-filter: blur(15px);*/
 }
 .el_navs>ul {
   width: 999px;
@@ -45,8 +52,8 @@ html,body{
 #goods{
   height:calc(100% - 500px);
   overflow-y: auto;
-  filter: blur(15px);
-  -webkit-filter: blur(15px);
+  /*filter: blur(15px);*/
+  /*-webkit-filter: blur(15px);*/
 }
 .el_goods {
   margin-top: 18px;
@@ -154,6 +161,12 @@ li {
   border-radius: 8px;
   color: #666666;
   z-index: 2;
+  overflow-y: auto;
+}
+.el_window2>p:last-child{
+  text-indent: 24px;
+  padding: 0 24px;
+  font-size: 24px;
 }
 .el_window1>.el_cloose, .el_window2>.el_cloose {
   position: absolute;
@@ -239,3 +252,10 @@ li {
   text-decoration: none;
   color: rgb(0,191,142);
 }
+.mint-loadmore{
+  height: calc(100% - 500px);
+  overflow: auto;
+}
+/*.mint-loadmore-bottom{*/
+  /*display: none;*/
+/*}*/

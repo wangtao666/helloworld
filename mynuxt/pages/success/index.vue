@@ -49,7 +49,7 @@
       setTimeout(function () {
         self.isShow = false
         filter.flter('success')
-      }, Math.random() * 2000)
+      }, Math.random() * 500)
     }
   }
 </script>

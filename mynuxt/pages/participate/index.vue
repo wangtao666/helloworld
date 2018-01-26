@@ -4,7 +4,7 @@
   <div class="el_content">
     <div class="el_goods" v-for="(item, index) in goodss">
       <div class="el_img">
-        <img src="../../assets/images/prompt.png" alt="">
+        <img :src="item.url" alt="">
       </div>
       <div class="el_bewrite">
         <ul>
@@ -49,10 +49,14 @@
       }
     },
     async asyncData () {
-      return axios.get('https://jsonplaceholder.typicode.com/posts')
+      return axios.get('http://127.0.0.1:3666/getall')
         .then((res) => {
+          let names = []
+          for (let name in res.data){
+            names.push(name)
+          }
           return {
-            goodss: res.data.slice(0, 10)
+            goodss: res.data[names[1]]
           }
         })
     },
@@ -79,7 +83,7 @@
       setTimeout(function () {
         self.isShow = false
         filter.flter('participate')
-      }, Math.random() * 2000)
+      }, Math.random() * 1000)
     },
     head () {
       return {

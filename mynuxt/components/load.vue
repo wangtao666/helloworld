@@ -1,7 +1,7 @@
 <template>
-  <div class="loading-page" v-show="loading">
+  <span class="loading-page" v-show="loading">
     <p ref="load" v-show="loadi">Loading...</p>
-  </div>
+  </span>
 </template>
 <script>
   export default {
@@ -30,6 +30,7 @@
     height: 100%;
   }
   .loading-page {
+    display: inline-block;
     position: fixed;
     top: 0;
     left: 0;

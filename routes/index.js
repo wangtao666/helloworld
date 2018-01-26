@@ -39,42 +39,53 @@ module.exports = function(app) {
                 'attr': 'sf'
             }],
             'cf|1-10': [{
-                'title|+1': 1,
+                'title': Random.ctitle(3, 30),
                 'userId|+1': 1,
                 'id|+1': 1,
-                'body|+1': 1
+                'body|+1': 1,
+                'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
             }],
             'ct|1-10': [{
-                'title|+1': 10,
+                'title': Random.ctitle(3, 30),
                 'userId|+1': 11,
                 'id|+1': 12,
-                'body|+1': 13
+                'body|+1': 13,
+                'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
             }],
             'yt|1-10': [{
-                'title|+1': 20,
+                'title': Random.ctitle(3, 30),
                 'userId|+1': 21,
                 'id|+1': 22,
-                'body|+1': 23
+                'body|+1': 23,
+                'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
             }],
             'ys|1-10': [{
-                'title|+1': 30,
+                'title': Random.ctitle(3, 30),
                 'userId|+1': 31,
                 'id|+1': 32,
-                'body|+1': 33
+                'body|+1': 33,
+                'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
             }],
             'et|1-10': [{
-                'title|+1': 40,
+                'title': Random.ctitle(3, 30),
                 'userId|+1': 41,
                 'id|+1': 42,
-                'body|+1': 43
+                'body|+1': 43,
+                'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
             }],
             'sf|1-10': [{
-                'title|+1': 50,
+                'title': Random.ctitle(3, 30),
                 'userId|+1': 51,
                 'id|+1': 52,
-                'body|+1': 53
-            }]
+                'body|+1': 53,
+                'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+            }],
+            'content': Random.paragraph()
         });
+        /**设置响应头允许ajax跨域访问**/
+        res.setHeader("Access-Control-Allow-Origin","*");
+        /*星号表示所有的异域请求都可以接受，*/
+        res.setHeader("Access-Control-Allow-Methods","GET,POST");
         res.send(data2);
         console.log(data2);
     });

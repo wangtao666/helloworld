@@ -4,7 +4,7 @@
     </div>
     <div class="el_personnel">
       <span class="el_avatar"></span>
-      <span class="el_jion">XX和XX正在组团抢优惠，快来加入吧！</span>
+      <span class="el_jion">XX正在组团抢优惠，快来加入吧！</span>
     </div>
     <div class="btg_time_line clean width750" id="fbb">
       <section class="_right timeall">
@@ -20,14 +20,14 @@
     <div class="el_nav">
       <div class="el_navs">
         <ul class="clear" ref="mybox">
-          <li :class="{active: active == index}" @click="check(index)" v-for="(item, index) in clas" :key="index">{{ item.choose }}</li>
+          <li :class="{active: active == index}" @click="check(index, item.attr)" v-for="(item, index) in clas" :key="index">{{ item.name }}</li>
         </ul>
       </div>
     </div>
     <div class="el_content">
       <div class="el_goods" v-for="(item, index) in goodss" :key="index" @click="goDetail">
         <div class="el_img">
-          <img src="../../assets/images/prompt.png" alt=""/>
+          <img :src="item.url" alt=""/>
         </div>
         <div class="el_bewrite">
           <ul>
@@ -42,7 +42,7 @@
               <span>{{ item.id }}</span>
               <span>
                   市场价:
-                  <span>￥{{ item.body.slice(0, 1) }}</span>
+                  <span>￥{{ item.body }}</span>
               </span>
             </li>
           </ul>
@@ -58,7 +58,8 @@
       return {
         active: 0,
         clas: [],
-        goodss: []
+        goodss: [],
+        alldata:[]
       }
     },
     head () {
@@ -67,8 +68,9 @@
       }
     },
     methods: {
-      check: function (e) {
+      check: function (e, attr) {
         this.active = e
+        this.goodss = this.alldata[attr]
       },
       goDetail: function () {
         location.href = '/groupDetails'
@@ -85,13 +87,18 @@
     },
     async asyncData () {
       return axios.all([
-        axios.get('https://jsonplaceholder.typicode.com/posts'),
         axios.get('http://127.0.0.1:3666/getall')
       ])
-        .then(axios.spread(function (goods, cla) {
+        .then(axios.spread(function (cla) {
+          let names = [];
+          // 获得所有对象的名称
+          for(let name in cla.data) {
+            names.push(name)
+          }
           return {
-            goodss: goods.data.slice(0, 10),
-            clas: cla.data
+            clas: cla.data.choose,
+            goodss:cla.data[names[1]],
+            alldata:cla.data
           }
         }))
     }

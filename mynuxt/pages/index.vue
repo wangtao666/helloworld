@@ -11,28 +11,30 @@
         <li :class="{active: active == index}" @click="check(index, item.attr)" v-for='(item, index) in clas' :key="index">{{ item.name }}</li>
       </ul>
     </div>
-    <div id="goods">
-      <div v-for="(item, index) in goodss" :class="goods" @click="goDetail">
-        <div :class="imgs">
-          <img src="../assets/images/prompt.png" alt="">
-        </div>
-        <div :class="bewrite">
-          <ul>
-            <li>{{ item.title }}</li>
-            <li>零售价:
-              <span>￥</span>
-              <span>{{ item.userId }}</span>
-            </li>
-            <li>
-              拼团价：
-              <span>￥</span>
-              <span>{{ item.id }}</span>
-              <span>市场价:<span>￥{{ item.body}}</span></span>
-            </li>
-          </ul>
+    <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+      <div id="goods">
+        <div v-for="(item, index) in goodss" :class="goods" @click="goDetail">
+          <div :class="imgs">
+            <img :src="item.url" alt="">
+          </div>
+          <div :class="bewrite">
+            <ul>
+              <li>{{ item.title }}</li>
+              <li>零售价:
+                <span>￥</span>
+                <span>{{ item.userId }}</span>
+              </li>
+              <li>
+                拼团价：
+                <span>￥</span>
+                <span>{{ item.id }}</span>
+                <span>市场价:<span>￥{{ item.body}}</span></span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </mt-loadmore>
     <div :class="dailog" v-show="data1" ref="dailog">
       <div :class="window1" v-show="data2">
         <div class="el_cloose" @click="cloose">x</div>
@@ -48,10 +50,11 @@
       <div :class="window2" v-show="data3">
         <div class="el_cloose" @click="cloose">x</div>
         <p class="el_top_font">活动规则</p>
-        <p></p>
+        <p>
+          {{ alldata.content }}
+        </p>
       </div>
     </div>
-    <Btn :show2="show2"></Btn>
     <div id="lead">
       <ul :class="choose">
         <li>
@@ -66,6 +69,7 @@
       </ul>
       <nuxt/>
     </div>
+    <Btn :show2="show2"></Btn>
     <Load v-show="isShow"></Load>
   </div>
 </template>
@@ -101,7 +105,8 @@
         isShow: true,
         show2: true,
         goodss: [],
-        alldata: []
+        alldata: [],
+        allLoaded: false
       }
     },
     async asyncData () {
@@ -153,10 +158,13 @@
       self.$refs.dailog.children[1].style.left = win1lt + 'px'
       self.$refs.dailog.children[1].style.top = win1tp + 'px'
       //加载动画
+      filter.flter('box', true)
+      self.isShow = true
       setTimeout(function () {
         self.isShow = false
-        filter.flter('box')
-      }, Math.random() * 2000)
+        filter.flter('box', false)
+      }, Math.random() * 1000)
+      document.getElementsByClassName('mint-loadmore-bottom')[0].innerHTML = '没有更多啦！下拉刷新试试！'
     },
     methods: {
       check: function (e, att) {
@@ -192,6 +200,37 @@
       },
       goDetail: function () {
         location.href = 'groupDetails'
+      },
+      loadTop: function () {
+        // 加载更多数据  可自行写事件(拉到顶部时)
+        this.$refs.loadmore.onTopLoaded();
+        let self = this
+        axios.get('http://192.168.79.12:3666/getall')
+          .then(function(response){
+            filter.flter('box', true)
+            self.isShow = true
+            // 让当前被选中的导航 在下拉刷新后一样的呈现出当前导航对应的内容
+            let stext = document.getElementsByClassName('active')[0].innerText
+            let curtext = ''
+            for (let i = 0; i<self.alldata.choose.length; i++) {
+              if (self.alldata.choose[i].name == stext) {
+                curtext = self.alldata.choose[i].attr
+              }
+            }
+            self.goodss = response.data[curtext]
+            setTimeout(function () {
+              self.isShow = false
+              filter.flter('box', false)
+            }, Math.random() * 1000)
+          })
+          .catch(function(err){
+            console.log(err);
+          });
+      },
+      loadBottom: function () {
+        // 加载更多数据 加载完成时的事件
+        this.allLoaded = true;// 若数据已全部获取完毕
+        this.$refs.loadmore.onBottomLoaded();
       }
     }
 }
