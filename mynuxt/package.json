@@ -23,6 +23,8 @@
     "fs": "0.0.1-security",
     "jquery": "^3.2.1",
     "mint-ui": "^2.2.13",
+    "mockjs": "^1.0.1-beta3",
+    "mongoose": "^5.0.2",
     "mysql": "2.13.0",
     "nuxt": "v1.0.0-alpha.4",
     "redis": "^2.8.0",

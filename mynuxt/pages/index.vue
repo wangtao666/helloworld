@@ -112,12 +112,14 @@
     async asyncData () {
       // 记得return 不然不会返回结果
       return axios.all([
-        axios.get('http://127.0.0.1:3666/getall')
+        axios.get('http://127.0.0.1:3222/api/gettitle'),
+        axios.get('http://127.0.0.1:3222/api/getclass')
       ])
-        .then(axios.spread(function (reposResp) {
+        .then(axios.spread(function (reposResp, getclass) {
+          console.log(reposResp.data)
           let names = [];
           // 获得所有对象的名称
-          for(let name in reposResp.data) {
+          for(let name in getclass.data) {
             names.push(name)
           }
           // 上面请求都完成后，才执行这个回调方法
@@ -125,9 +127,9 @@
             // 头部导航内容
             clas: reposResp.data.choose,
             // 取索引为1的对象默认展示
-            goodss: reposResp.data[names[1]],
-            // 所有数据记录一下
-            alldata: reposResp.data
+            goodss: getclass.data[names[1]],
+            // 分类数据记录一下
+            alldata: getclass.data
           }
         }))
     },
@@ -207,23 +209,17 @@
         let self = this
         axios.get('/api/getmsg')
           .then(function(response){
-            filter.flter('box', true)
-            self.isShow = true
             // 让当前被选中的导航 在下拉刷新后一样的呈现出当前导航对应的内容
             let stext = document.getElementsByClassName('active')[0].innerText
             let curtext = ''
-            for (let i = 0; i<self.alldata.choose.length; i++) {
-              if (self.alldata.choose[i].name == stext) {
-                curtext = self.alldata.choose[i].attr
+            for (let i = 0; i<self.clas.length; i++) {
+              if (self.clas[i].name == stext) {
+                curtext = self.clas[i].attr
               }
             }
             // JSON.parse() 字符串转json格式
             self.goodss = JSON.parse(response.data)[curtext]
-            console.log('22222222222:', JSON.parse(response.data))
-            setTimeout(function () {
-              self.isShow = false
-              filter.flter('box', false)
-            }, Math.random() * 1000)
+//            console.log('22222222222:', JSON.parse(response.data))
           })
           .catch(function(err){
             console.log(err);

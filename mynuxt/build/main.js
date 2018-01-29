@@ -65,7 +65,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -128,7 +128,7 @@ module.exports = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users__ = __webpack_require__(6);
 
 
 
@@ -144,7 +144,7 @@ router.use(__WEBPACK_IMPORTED_MODULE_1__users__["a" /* default */]);
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(6);
+module.exports = __webpack_require__(9);
 
 
 /***/ },
@@ -157,13 +157,51 @@ module.exports = require("nuxt");
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
+//链接 mongoose nuxt集合
+var mongoose = __webpack_require__(8);
+var db = mongoose.createConnection('mongodb://localhost:27017/mynuxt');
+//链接错误
+db.on('error', function (err) {
+    console.log(err);
+});
+//Schema 结构
+var Schema = mongoose.Schema;
+//表 nuxt
+var nuxtlistScheMa = new Schema({
+    name: String,
+    choose: String
+});
+//表tishi
+var tslistScheMa = new Schema({
+    tishi: String
+});
+//关联 nuxtlist -> nuxt 表
+exports.nuxtlist = db.model('nuxt', nuxtlistScheMa, 'nuxt');
+//关联 tslistScheMa
+exports.tslist = db.model('tishi', tslistScheMa, 'tishi');
+exports.db = db;
+console.log('数据库启动成功！！！！');
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_request__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_request__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_request___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_request__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mockjs__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mockjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_mockjs__);
 
 
+
+
+var Random = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.Random;
+var nuxtlist = __WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver___default.a.nuxtlist;
+var tslist = __WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver___default.a.tslist;
 
 var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
@@ -172,33 +210,124 @@ router.get('/getmsg', function (req, res, next) {
     console.log('error:', error); // 返回错误信息
     console.log('statusCode:', response && response.statusCode); // 返回请求的状态码
     console.log('body:', body); // 返回回来的数据
-    // let data2 = [{
-    //     'type':'system',
-    //     'head':'/images/head.jpg',
-    //     'time':'2017-09-22 10:30:00',
-    //     'title':'以‘白日梦’为主题展开联想，10万元基金共你风向基金共你风向！',
-    //     'tip':'以‘白日梦’为主题展开联想，10万元基金共你风向基金共你风向！以‘白日梦’为主题展开联想。'
-    // }]
     res.json(body);
   });
+});
+
+router.get('/gettitle', function (req, res, next) {
+  var data2 = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
+    'choose': [{
+      'name': '全部',
+      'attr': 'all'
+    }, {
+      'name': '厨房',
+      'attr': 'cf'
+    }, {
+      'name': '餐厅',
+      'attr': 'ct'
+    }, {
+      'name': '阳台/卫生间',
+      'attr': 'yt'
+    }, {
+      'name': '浴室',
+      'attr': 'ys'
+    }, {
+      'name': '儿童房',
+      'attr': 'et'
+    }, {
+      'name': '书房',
+      'attr': 'sf'
+    }]
+  });
+  res.json(data2);
+  // console.log(data2)
+});
+
+router.get('/getclass', function (req, res, next) {
+  var data = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
+    'all|1-10': [{
+      'title': Random.ctitle(3, 30),
+      'userId|+1': 71,
+      'id|+1': 1,
+      'body|+1': 1,
+      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+    }],
+    'cf|1-10': [{
+      'title': Random.ctitle(3, 30),
+      'userId|+1': 1,
+      'id|+1': 1,
+      'body|+1': 1,
+      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+    }],
+    'ct|1-10': [{
+      'title': Random.ctitle(3, 30),
+      'userId|+1': 11,
+      'id|+1': 12,
+      'body|+1': 13,
+      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+    }],
+    'yt|1-10': [{
+      'title': Random.ctitle(3, 30),
+      'userId|+1': 21,
+      'id|+1': 22,
+      'body|+1': 23,
+      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+    }],
+    'ys|1-10': [{
+      'title': Random.ctitle(3, 30),
+      'userId|+1': 31,
+      'id|+1': 32,
+      'body|+1': 33,
+      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+    }],
+    'et|1-10': [{
+      'title': Random.ctitle(3, 30),
+      'userId|+1': 41,
+      'id|+1': 42,
+      'body|+1': 43,
+      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+    }],
+    'sf|1-10': [{
+      'title': Random.ctitle(3, 30),
+      'userId|+1': 51,
+      'id|+1': 52,
+      'body|+1': 53,
+      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+    }],
+    'content': Random.paragraph()
+  });
+  res.json(data);
+  // console.log(data)
 });
 
 /* harmony default export */ exports["a"] = router;
 
 /***/ },
-/* 6 */
+/* 7 */
+/***/ function(module, exports) {
+
+module.exports = require("mockjs");
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+module.exports = require("mongoose");
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
 module.exports = require("regenerator-runtime");
 
 /***/ },
-/* 7 */
+/* 10 */
 /***/ function(module, exports) {
 
 module.exports = require("request");
 
 /***/ },
-/* 8 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";

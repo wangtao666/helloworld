@@ -20,6 +20,9 @@ module.exports = function(app) {
         // })
         var data2 = Mock.mock({
             'choose': [{
+                'name': '全部',
+                'attr': 'all'
+            },{
                 'name': '厨房',
                 'attr': 'cf'
             }, {
@@ -37,6 +40,13 @@ module.exports = function(app) {
             }, {
                 'name': '书房',
                 'attr': 'sf'
+            }],
+            'all|1-10': [{
+                'title': Random.ctitle(3, 30),
+                'userId|+1': 71,
+                'id|+1': 1,
+                'body|+1': 1,
+                'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
             }],
             'cf|1-10': [{
                 'title': Random.ctitle(3, 30),
@@ -83,9 +93,9 @@ module.exports = function(app) {
             'content': Random.paragraph()
         });
         /**设置响应头允许ajax跨域访问**/
-        res.setHeader("Access-Control-Allow-Origin","*");
-        /*星号表示所有的异域请求都可以接受，*/
-        res.setHeader("Access-Control-Allow-Methods","GET,POST");
+        // res.setHeader("Access-Control-Allow-Origin","*");
+        // /*星号表示所有的异域请求都可以接受，*/
+        // res.setHeader("Access-Control-Allow-Methods","GET,POST");
         res.send(data2);
         console.log(data2);
     });
