@@ -205,7 +205,7 @@
         // 加载更多数据  可自行写事件(拉到顶部时)
         this.$refs.loadmore.onTopLoaded();
         let self = this
-        axios.get('http://192.168.79.12:3666/getall')
+        axios.get('/api/getmsg')
           .then(function(response){
             filter.flter('box', true)
             self.isShow = true
@@ -217,7 +217,9 @@
                 curtext = self.alldata.choose[i].attr
               }
             }
-            self.goodss = response.data[curtext]
+            // JSON.parse() 字符串转json格式
+            self.goodss = JSON.parse(response.data)[curtext]
+            console.log('22222222222:', JSON.parse(response.data))
             setTimeout(function () {
               self.isShow = false
               filter.flter('box', false)
