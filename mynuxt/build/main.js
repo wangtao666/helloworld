@@ -206,10 +206,10 @@ var tslist = __WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver___default.a.tslist;
 var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
 router.get('/getmsg', function (req, res, next) {
-  __WEBPACK_IMPORTED_MODULE_1_request___default()('http://127.0.0.1:3666/getall', function (error, response, body) {
+  __WEBPACK_IMPORTED_MODULE_1_request___default()('http://10.10.1.191:3666/getall', function (error, response, body) {
     console.log('error:', error); // 返回错误信息
     console.log('statusCode:', response && response.statusCode); // 返回请求的状态码
-    console.log('body:', body); // 返回回来的数据
+    //console.log('body:', body) // 返回回来的数据
     res.json(body);
   });
 });
@@ -217,26 +217,26 @@ router.get('/getmsg', function (req, res, next) {
 router.get('/gettitle', function (req, res, next) {
   var data2 = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
     'choose': [{
-      'name': '全部',
-      'attr': 'all'
+      'categoryName': '全部',
+      'id': 'all'
     }, {
-      'name': '厨房',
-      'attr': 'cf'
+      'categoryName': '厨房',
+      'id': 'cf'
     }, {
-      'name': '餐厅',
-      'attr': 'ct'
+      'categoryName': '餐厅',
+      'id': 'ct'
     }, {
-      'name': '阳台/卫生间',
-      'attr': 'yt'
+      'categoryName': '阳台/卫生间',
+      'id': 'yt'
     }, {
-      'name': '浴室',
-      'attr': 'ys'
+      'categoryName': '浴室',
+      'id': 'ys'
     }, {
-      'name': '儿童房',
-      'attr': 'et'
+      'categoryName': '儿童房',
+      'id': 'et'
     }, {
-      'name': '书房',
-      'attr': 'sf'
+      'categoryName': '书房',
+      'id': 'sf'
     }]
   });
   res.json(data2);
@@ -246,58 +246,136 @@ router.get('/gettitle', function (req, res, next) {
 router.get('/getclass', function (req, res, next) {
   var data = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
     'all|1-10': [{
-      'title': Random.ctitle(3, 30),
-      'userId|+1': 71,
-      'id|+1': 1,
-      'body|+1': 1,
-      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+      'goodsName': Random.ctitle(3, 30),
+      'salesPrice|+1': 71,
+      'spellPrice|+1': 1,
+      'marketPrice|+1': 1,
+      'goodsPic': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
     }],
     'cf|1-10': [{
-      'title': Random.ctitle(3, 30),
-      'userId|+1': 1,
-      'id|+1': 1,
-      'body|+1': 1,
-      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+      'goodsName': Random.ctitle(3, 30),
+      'salesPrice|+1': 1,
+      'spellPrice|+1': 1,
+      'marketPrice|+1': 1,
+      'goodsPic': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
     }],
     'ct|1-10': [{
-      'title': Random.ctitle(3, 30),
-      'userId|+1': 11,
-      'id|+1': 12,
-      'body|+1': 13,
-      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+      'goodsName': Random.ctitle(3, 30),
+      'salesPrice|+1': 11,
+      'spellPrice|+1': 12,
+      'marketPrice|+1': 13,
+      'goodsPic': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
     }],
     'yt|1-10': [{
-      'title': Random.ctitle(3, 30),
-      'userId|+1': 21,
-      'id|+1': 22,
-      'body|+1': 23,
-      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+      'goodsName': Random.ctitle(3, 30),
+      'salesPrice|+1': 21,
+      'spellPrice|+1': 22,
+      'marketPrice|+1': 23,
+      'goodsPic': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
     }],
     'ys|1-10': [{
-      'title': Random.ctitle(3, 30),
-      'userId|+1': 31,
-      'id|+1': 32,
-      'body|+1': 33,
-      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+      'goodsName': Random.ctitle(3, 30),
+      'salesPrice|+1': 31,
+      'spellPrice|+1': 32,
+      'marketPrice|+1': 33,
+      'goodsPic': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
     }],
     'et|1-10': [{
-      'title': Random.ctitle(3, 30),
-      'userId|+1': 41,
-      'id|+1': 42,
-      'body|+1': 43,
-      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+      'goodsName': Random.ctitle(3, 30),
+      'salesPrice|+1': 41,
+      'spellPrice|+1': 42,
+      'marketPrice|+1': 43,
+      'goodsPic': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
     }],
     'sf|1-10': [{
-      'title': Random.ctitle(3, 30),
-      'userId|+1': 51,
-      'id|+1': 52,
-      'body|+1': 53,
-      'url': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
+      'goodsName': Random.ctitle(3, 30),
+      'salesPrice|+1': 51,
+      'spellPrice|+1': 52,
+      'marketPrice|+1': 53,
+      'goodsPic': Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda')
     }],
     'content': Random.paragraph()
   });
   res.json(data);
   // console.log(data)
+});
+
+router.get('/getDetail', function (req, res, next) {
+  var url = [];
+  var timeId = setInterval(function () {
+    var aa = Random.image('750x750', Random.color(), '#FFF', 'png', 'heheda');
+    url.push(aa);
+    if (url.length > 10) {
+      clearInterval(timeId);
+      //第一个参数是数据  第二个不知道  第三个代表缩进多少
+      url = JSON.stringify(url, null, 1);
+      var data = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
+        "date": [{
+          "contentsPic": url,
+          "goodsDetail": {
+            "goodsName": Random.ctitle(3, 30),
+            "headPrice": 100, //团长价
+            "marketPrice": 300, //市场价
+            "pics": Random.ctitle(3, 10),
+            "spellPrice": 200 //拼团价
+          },
+          "isShowBuy": false,
+          "showAttributeList": [{
+            "attributeName": "颜色",
+            "attributeOptionList": ["蓝色", "红色", "绿色"]
+          }, {
+            "attributeName": "抽屉",
+            "attributeOptionList": ["一抽", "两抽", "三抽"]
+          }, {
+            "attributeName": "品牌",
+            "attributeOptionList": ["好", "中", "坏"]
+          }, {
+            "attributeName": "几台",
+            "attributeOptionList": ["一", "二", "三"]
+          }, {
+            "attributeName": "几台",
+            "attributeOptionList": ["一", "二", "三"]
+          }, {
+            "attributeName": "几台",
+            "attributeOptionList": ["一", "二", "三"]
+          }, {
+            "attributeName": "几台",
+            "attributeOptionList": ["一", "二", "三"]
+          }]
+        }],
+        "msg": "请求成功！",
+        "state": 1
+      });
+      console.log(1111111111111);
+      res.json(data);
+    }
+  }, 50);
+
+  // console.log(JSON.stringify(data))
+});
+
+router.get('/getRule', function (req, res, next) {
+  var data = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
+    "date": {
+      "deliveryFreight": [{
+        "deliveryArea": "四川省-成都市-青羊区:东坡街道,光华街道",
+        "deliveryPrice": "0-10元运装费为0.2元;10.01-1000元运装费为0元;"
+      }, {
+        "deliveryArea": "四川省-成都市-青羊区:东坡街道,光华街道",
+        "deliveryPrice": "0-10元运装费为0.2元;10.01-1000元运装费为0元;"
+      }, {
+        "deliveryArea": "四川省-成都市-青羊区:东坡街道,光华街道",
+        "deliveryPrice": "0-10元运装费为0.2元;10.01-1000元运装费为0元;"
+      }, {
+        "deliveryArea": "四川省-成都市-青羊区:东坡街道,光华街道",
+        "deliveryPrice": "0-10元运装费为0.2元;10.01-1000元运装费为0元;"
+      }],
+      "sendDetail": "测试内容bf49"
+    },
+    "msg": "测试内容p1qv",
+    "state": 35587
+  });
+  res.json(data);
 });
 
 /* harmony default export */ exports["a"] = router;
@@ -410,7 +488,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 var app = __WEBPACK_IMPORTED_MODULE_2_express___default()();
-console.log('22222222222222222:', process);
 var host = process.env.HOST;
 var port = process.env.PORT || 3000;
 

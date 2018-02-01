@@ -341,6 +341,7 @@
   display: block;
   width: 34px;
   height: 27px;
+  background: url(../../assets/images/icon.png) no-repeat;
   background-position: 0 0;
   position: absolute;
   top: 24px;
@@ -384,12 +385,15 @@ em, i {
 }
 .spxq_property p span {
   color: #999;
-  padding-right: 10px;
+  padding-right: 30px;
 }
 .spxq_property p b {
   padding: 4px;
   color: #666;
   border-radius: 4px;
+  display: inline-block;
+  width: 80px;
+  text-align: center;
 }
 b, strong {
   font-weight: normal;
@@ -404,6 +408,17 @@ body, button, input, select, textarea {
   border-bottom: 1px solid #e3e3e3;
   position: relative;
 }
+.spxq_property:after {
+  content: "";
+  display: block;
+  background: url(../images/icon.png) no-repeat;
+  background-position: -50px -50px;
+  width: 17px;
+  height: 30px;
+  position: absolute;
+  left: 691px;
+  top: 48%;
+}
 .spxq_intro {
   font-size: 24px;
 }
@@ -414,9 +429,7 @@ body, button, input, select, textarea {
   z-index: 1;
   background: inherit;
   margin-bottom: 96px;
-}
-.icon_img, .fix-bottom-buy .car:after, .cus-name .link_name:before, .top_input a.search:after, .index_discount a.search:after, .swiper-container .control a.share:after, .p_banner_box .control a.share:after, .p_banner_box .control a.collect:after, .swiper-container .control a.collect:after, .sp_focus .hot:after, .sp_focus .focus_prize .car_ico, .fix-bottom-nav a:after, .spxq_type_2 .arrow span, .spxq_type_2 .status span.share:after, .spxq_type_2 .status span.collect:before, .spxq_property:after, .property_select .close, .property_select .property p span.cur:after, .float_nav a span.n2:after, .float_nav a.gwc:after, .float_nav a.sy:after, .float_nav a.tjsp:after, .float_nav a.splb:after, .float_nav a.ddzx:after, .float_nav a.dt:after, .ddzx_my_top a.n1 span:after, .ddzx_my_top a.n2 span:after, .business_info p.phone:before, .business_info p.address:before, .dfh-box .info a:before, .dfh-box .id span:before, .dfh-box .id span:after, .dfh-box .toggle:after, .ddxq-sp-name a:before, .splb_top a.search:after, .splb_top .x b, .splb_top .select:before, .splb_top .select .switch a:before, .splb_top .select:after, .home_icon:before {
-  background: url(../../assets/images/icon.png) no-repeat;
+  overflow-x: hidden;
 }
 .d_switch a.cur:after, .d_switch a:hover:after {
   content: '';
@@ -515,6 +528,17 @@ a {
   content: '';
   display: block;
   background-image: url("../../assets/images/left.png");
+}
+#delivery:after {
+  content: "";
+  display: block;
+  background: url(../../assets/images/icon.png) no-repeat;
+  background-position: -50px -50px;
+  width: 17px;
+  height: 30px;
+  position: absolute;
+  left: 691px;
+  top: 34%;
 }
 .demo-block {
   border: 1px solid #ebebeb;

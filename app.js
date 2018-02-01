@@ -23,6 +23,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 routes(app);
 
-app.listen(3666, function () {
-    console.log('启动成功！！！http://localhost:3666/')
-});
+app.listen(3666);
+console.log('启动成功！！！http://10.10.1.191:3666/')

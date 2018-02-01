@@ -1,6 +1,6 @@
 //链接 mongoose nuxt集合
 var mongoose = require('mongoose');
-var db = mongoose.createConnection('mongodb://localhost:27017/mynuxt');
+var db = mongoose.createConnection('mongodb://192.168.79.12:27017/mynuxt');
 //链接错误
 db.on('error',function (err) {
     console.log(err);

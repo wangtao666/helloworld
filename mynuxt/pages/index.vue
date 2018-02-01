@@ -8,27 +8,27 @@
     <Times></Times>
     <div :class="navs" id="navs">
       <ul :class="clear" ref="mybox">
-        <li :class="{active: active == index}" @click="check(index, item.attr)" v-for='(item, index) in clas' :key="index">{{ item.name }}</li>
+        <li :class="{active: active == index}" @click="check(index, item.id)" v-for='(item, index) in clas' :key="index">{{ item.categoryName }}</li>
       </ul>
     </div>
     <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
       <div id="goods">
         <div v-for="(item, index) in goodss" :class="goods" @click="goDetail">
           <div :class="imgs">
-            <img :src="item.url" alt="">
+            <img :src="item.goodsPic" alt="">
           </div>
           <div :class="bewrite">
             <ul>
-              <li>{{ item.title }}</li>
-              <li>零售价:
+              <li>{{ item.goodsName }}</li>
+              <li>销售价:
                 <span>￥</span>
-                <span>{{ item.userId }}</span>
+                <span>{{ item.salesPrice }}</span>
               </li>
               <li>
                 拼团价：
                 <span>￥</span>
-                <span>{{ item.id }}</span>
-                <span>市场价:<span>￥{{ item.body}}</span></span>
+                <span>{{ item.spellPrice }}</span>
+                <span>市场价:<span>￥{{ item.marketPrice}}</span></span>
               </li>
             </ul>
           </div>
@@ -116,7 +116,7 @@
         axios.get('http://127.0.0.1:3222/api/getclass')
       ])
         .then(axios.spread(function (reposResp, getclass) {
-          console.log(reposResp.data)
+          console.log(reposResp.data.choose)
           let names = [];
           // 获得所有对象的名称
           for(let name in getclass.data) {
@@ -127,7 +127,7 @@
             // 头部导航内容
             clas: reposResp.data.choose,
             // 取索引为1的对象默认展示
-            goodss: getclass.data[names[1]],
+            goodss: getclass.data[names[0]],
             // 分类数据记录一下
             alldata: getclass.data
           }
@@ -207,19 +207,19 @@
         // 加载更多数据  可自行写事件(拉到顶部时)
         this.$refs.loadmore.onTopLoaded();
         let self = this
-        axios.get('/api/getmsg')
+        axios.get('/api/getclass')
           .then(function(response){
             // 让当前被选中的导航 在下拉刷新后一样的呈现出当前导航对应的内容
             let stext = document.getElementsByClassName('active')[0].innerText
             let curtext = ''
             for (let i = 0; i<self.clas.length; i++) {
-              if (self.clas[i].name == stext) {
-                curtext = self.clas[i].attr
+              if (self.clas[i].categoryName == stext) {
+                curtext = self.clas[i].id
               }
             }
             // JSON.parse() 字符串转json格式
-            self.goodss = JSON.parse(response.data)[curtext]
-//            console.log('22222222222:', JSON.parse(response.data))
+            self.goodss = response.data[curtext]
+            console.log('22222222222:', response.data[curtext])
           })
           .catch(function(err){
             console.log(err);

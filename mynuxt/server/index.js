@@ -4,7 +4,6 @@ import express from 'express'
 import api from './api'
 
 const app = express()
-console.log('22222222222222222:', process)
 const host = process.env.HOST
 const port = process.env.PORT || 3000
 
