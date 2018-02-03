@@ -205,6 +205,7 @@ var tslist = __WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver___default.a.tslist;
 
 var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
+// 接口转发测试
 router.get('/getmsg', function (req, res, next) {
   __WEBPACK_IMPORTED_MODULE_1_request___default()('http://10.10.1.191:3666/getall', function (error, response, body) {
     console.log('error:', error); // 返回错误信息
@@ -214,6 +215,7 @@ router.get('/getmsg', function (req, res, next) {
   });
 });
 
+// 获得分类
 router.get('/gettitle', function (req, res, next) {
   var data2 = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
     'choose': [{
@@ -243,6 +245,7 @@ router.get('/gettitle', function (req, res, next) {
   // console.log(data2)
 });
 
+// 获得商品
 router.get('/getclass', function (req, res, next) {
   var data = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
     'all|1-10': [{
@@ -300,6 +303,7 @@ router.get('/getclass', function (req, res, next) {
   // console.log(data)
 });
 
+// 商品详情页
 router.get('/getDetail', function (req, res, next) {
   var url = [];
   var timeId = setInterval(function () {
@@ -346,7 +350,6 @@ router.get('/getDetail', function (req, res, next) {
         "msg": "请求成功！",
         "state": 1
       });
-      console.log(1111111111111);
       res.json(data);
     }
   }, 50);
@@ -354,6 +357,7 @@ router.get('/getDetail', function (req, res, next) {
   // console.log(JSON.stringify(data))
 });
 
+// 运费规则
 router.get('/getRule', function (req, res, next) {
   var data = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
     "date": {
@@ -374,6 +378,38 @@ router.get('/getRule', function (req, res, next) {
     },
     "msg": "测试内容p1qv",
     "state": 35587
+  });
+  res.json(data);
+});
+
+// 获取参团列表
+router.get('/getGroupList', function (req, res, next) {
+  var data = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
+    "data|1-5": [{
+      "activityId": "测试内容o71t", // 活动id
+      "headName": "测试内容42hd", // 团长名
+      "joinId": "测试内容3e7q", // 组团id
+      "joinSpellNum": 83820, // 参团人数
+      "spellImg": Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda'), // 图片url
+      "spellName": Random.ctitle(3, 30) // 团名称
+    }],
+    "msg": "成功",
+    "state": 73773
+  });
+  res.json(data);
+});
+
+router.get('/gettest', function (req, res, next) {
+  var data = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
+    "data": [{
+      "title": Random.ctitle(3, 30)
+    }, {
+      "title": Random.ctitle(3, 30)
+    }, {
+      "title": Random.ctitle(3, 30)
+    }, {
+      "title": Random.ctitle(3, 30)
+    }]
   });
   res.json(data);
 });

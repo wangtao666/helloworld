@@ -20,7 +20,7 @@
           <div :class="bewrite">
             <ul>
               <li>{{ item.goodsName }}</li>
-              <li>销售价:
+              <li>团长价:
                 <span>￥</span>
                 <span>{{ item.salesPrice }}</span>
               </li>
@@ -191,7 +191,7 @@
         } else if (e.target.innerText === '参团') {
           location.href = 'participate'
         } else {
-          location.href = '/myGroups/fightGroups'
+          location.href = '/myGroups'
         }
       },
       gotuan: function () {

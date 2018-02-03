@@ -8,6 +8,7 @@ let tslist = nuxtSchema.tslist
 
 let router = Router()
 
+// 接口转发测试
 router.get('/getmsg', (req, res, next) => {
   request('http://10.10.1.191:3666/getall', function (error, response, body) {
     console.log('error:', error) // 返回错误信息
@@ -17,6 +18,7 @@ router.get('/getmsg', (req, res, next) => {
   });
 })
 
+// 获得分类
 router.get('/gettitle', (req, res, next) => {
   let data2 = Mock.mock({
     'choose': [{
@@ -46,6 +48,7 @@ router.get('/gettitle', (req, res, next) => {
   // console.log(data2)
 })
 
+// 获得商品
 router.get('/getclass', (req, res, next) => {
   let data = Mock.mock({
     'all|1-10': [{
@@ -103,6 +106,7 @@ router.get('/getclass', (req, res, next) => {
   // console.log(data)
 })
 
+// 商品详情页
 router.get('/getDetail', (req, res, next) => {
   let url = [];
   let timeId = setInterval(function () {
@@ -149,7 +153,6 @@ router.get('/getDetail', (req, res, next) => {
         "msg": "请求成功！",
         "state": 1
       })
-      console.log(1111111111111)
       res.json(data)
     }
   },50);
@@ -157,6 +160,7 @@ router.get('/getDetail', (req, res, next) => {
   // console.log(JSON.stringify(data))
 })
 
+// 运费规则
 router.get('/getRule', (req, res, next) => {
   let data = Mock.mock({
     "date": {
@@ -179,6 +183,40 @@ router.get('/getRule', (req, res, next) => {
   },
     "msg": "测试内容p1qv",
     "state": 35587
+  })
+  res.json(data)
+})
+
+// 获取参团列表
+router.get('/getGroupList', (req, res, next) => {
+  let data = Mock.mock({
+    "data|1-5": [
+      {
+        "activityId": "测试内容o71t",// 活动id
+        "headName": "测试内容42hd",// 团长名
+        "joinId": "测试内容3e7q",// 组团id
+        "joinSpellNum": 83820,// 参团人数
+        "spellImg": Random.image('180x180', Random.color(), '#FFF', 'png', 'heheda'),// 图片url
+        "spellName": Random.ctitle(3, 30)// 团名称
+      }
+    ],
+    "msg": "成功",
+    "state": 73773
+  })
+  res.json(data)
+})
+
+router.get('/gettest', (req, res, next) => {
+  let data = Mock.mock({
+    "data" : [{
+      "title" : Random.ctitle(3, 30)
+    }, {
+      "title" : Random.ctitle(3, 30)
+    }, {
+      "title" : Random.ctitle(3, 30)
+    }, {
+      "title" : Random.ctitle(3, 30)
+    }]
   })
   res.json(data)
 })

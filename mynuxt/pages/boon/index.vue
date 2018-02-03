@@ -20,29 +20,29 @@
     <div class="el_nav">
       <div class="el_navs">
         <ul class="clear" ref="mybox">
-          <li :class="{active: active == index}" @click="check(index, item.attr)" v-for="(item, index) in clas" :key="index">{{ item.name }}</li>
+          <li :class="{active: active == index}" @click="check(index, item.id)" v-for="(item, index) in clas" :key="index">{{ item.categoryName }}</li>
         </ul>
       </div>
     </div>
     <div class="el_content">
       <div class="el_goods" v-for="(item, index) in goodss" :key="index" @click="goDetail">
         <div class="el_img">
-          <img :src="item.url" alt=""/>
+          <img :src="item.goodsPic" alt=""/>
         </div>
         <div class="el_bewrite">
           <ul>
-            <li>{{ item.title }}</li>
-            <li>零售价:
+            <li>{{ item.bewrite }}</li>
+            <li>团长价:
               <span>￥</span>
-              <span>{{ item.userId }}</span>
+              <span>{{ item.salesPrice }}</span>
             </li>
             <li>
               拼团价：
               <span>￥</span>
-              <span>{{ item.id }}</span>
+              <span>{{ item.spellPrice }}</span>
               <span>
                   市场价:
-                  <span>￥{{ item.body }}</span>
+                  <span>￥{{ item.marketPrice }}</span>
               </span>
             </li>
           </ul>
@@ -87,18 +87,25 @@
     },
     async asyncData () {
       return axios.all([
-        axios.get('http://127.0.0.1:3666/getall')
+        axios.get('http://127.0.0.1:3222/api/gettitle'),
+        axios.get('http://127.0.0.1:3222/api/getclass')
       ])
-        .then(axios.spread(function (cla) {
+        .then(axios.spread(function (reposResp, getclass) {
+          console.log(reposResp.data.choose)
           let names = [];
           // 获得所有对象的名称
-          for(let name in cla.data) {
+          for(let name in getclass.data) {
             names.push(name)
           }
+          console.log('2222222222222222:', getclass.data)
+          // 上面请求都完成后，才执行这个回调方法
           return {
-            clas: cla.data.choose,
-            goodss:cla.data[names[1]],
-            alldata:cla.data
+            // 头部导航内容
+            clas: reposResp.data.choose,
+            // 取索引为1的对象默认展示
+            goodss: getclass.data[names[0]],
+            // 分类数据记录一下
+            alldata: getclass.data
           }
         }))
     }

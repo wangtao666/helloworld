@@ -2,19 +2,19 @@
 <div id="participate">
   <div class="el_choose">选择团长，参团吧</div>
   <div class="el_content">
-    <div class="el_goods" v-for="(item, index) in goodss">
+    <div class="el_goods" v-for="(item, index) in goodss" :key="index">
       <div class="el_img">
-        <img :src="item.url" alt="">
+        <img :src="item.spellImg" alt="">
       </div>
       <div class="el_bewrite">
         <ul>
-          <li>{{ item.title }}</li>
+          <li>{{ item.spellName }}</li>
           <li>
             团长:
-            <span>{{ item.id }}</span>
+            <span>{{ item.headName }}</span>
           </li>
           <li>
-            <span>{{ item.id }}人参团</span>
+            <span>{{ item.joinSpellNum }}人参团</span>
             <span class="el_btn" @click="goct">去参团</span>
           </li>
         </ul>
@@ -43,20 +43,16 @@
   export default {
     data () {
       return {
-        goodss: [],
+        goodss: {},
         data1: false,
         isShow: true
       }
     },
     async asyncData () {
-      return axios.get('http://127.0.0.1:3666/getall')
+      return axios.get('http://127.0.0.1:3222/api/getGroupList')
         .then((res) => {
-          let names = []
-          for (let name in res.data){
-            names.push(name)
-          }
           return {
-            goodss: res.data[names[1]]
+            goodss: res.data.data
           }
         })
     },

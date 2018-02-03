@@ -63,6 +63,9 @@
       <div class="spxq_intro base_introf_b">
         <div class="abstract absattr">商品详情</div>
         <div class="edit" id="goodscontent">
+          <p style="font-size: 0" v-for="(item, index) in imgurl" :key="index">
+            <img :src="item" alt="">
+          </p>
         </div>
       </div>
       <div class="fix-bottom-group clean">

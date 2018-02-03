@@ -12,7 +12,7 @@
     </div>
     <div class="el_end">
       <p>温馨提示:</p>
-      <p>{{ ts.tishi }}</p>
+      <p>好消息！好消息！好消息！好消息！好消息！好消息！好消息！好消息！好消息！好消息！好消息！好消息！好消息！好消息！好消息！</p>
     </div>
     <Load v-show="isShow"></Load>
   </div>
@@ -28,15 +28,6 @@
         isShow: true
       }
     },
-    async asyncData () {
-      return axios.get('http://127.0.0.1:3666/getts')
-        .then((res) => {
-          console.log(res.data[0])
-          return {
-            ts: res.data[0]
-          }
-        })
-    },
     head () {
       return {
         title: '拼团抢福利'
@@ -49,7 +40,7 @@
       setTimeout(function () {
         self.isShow = false
         filter.flter('success')
-      }, Math.random() * 500)
+      }, Math.random() * 100)
     }
   }
 </script>
