@@ -5,8 +5,8 @@ Vue.use(Vuex)
 // vuex应用示例
 const store = () => new Vuex.Store({
   state: {
-    day: 0,
-    hour: 1,
+    day: 1,
+    hour: 0,
     minute: 0,
     second: 1
   },

@@ -171,7 +171,7 @@
     methods: {
       check: function (e, att) {
         this.active = e
-        // 属性不能用点的，要data[att]这样调用！！！！！！坑！ 因为所有数据都已经请求过来了，所以直接用，不用再发请求!!!
+        // 动态的属性名不能用点的，要data[att]这样调用！！！！！！坑！ 因为所有数据都已经请求过来了，所以直接用，不用再发请求!!!
         this.goodss = this.alldata[att]
       },
       seeinform: function () {

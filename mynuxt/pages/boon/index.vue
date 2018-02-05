@@ -10,10 +10,10 @@
       <section class="_right timeall">
         <div class="timeTxt">距结束</div>
         <ul class="btg-time">
-          <li class="timeDay">15天</li>
-          <li class="timeH">12</li>
-          <li class="timeM">44</li>
-          <li class="timeS">45</li>
+          <li class="el_timeDay">{{ $store.state.day }}天</li>
+          <li class="el_timeH">{{ $store.state.hour }}</li>
+          <li class="el_timeM">{{ $store.state.minute }}</li>
+          <li class="el_timeS">{{ $store.state.second }}</li>
         </ul>
       </section>
     </div>
@@ -74,6 +74,9 @@
       },
       goDetail: function () {
         location.href = '/groupDetails'
+      },
+      start: function () {// 倒计时
+        this.$store.commit('increment')
       }
     },
     mounted () {
@@ -84,6 +87,8 @@
         elWidth += lis[i].clientWidth
       }
       self.$refs.mybox.style.width = elWidth + 30 + 'px'
+      //开始倒计时
+      this.start()
     },
     async asyncData () {
       return axios.all([

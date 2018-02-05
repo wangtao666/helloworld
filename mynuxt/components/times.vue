@@ -1,11 +1,11 @@
 <template>
-  <div :class="timeall">
-    <div :class="timeTxt">距结束</div>
-    <ul :class="btg_time">
-      <li :class="timeDay">15天</li>
-      <li :class="timeH">12</li>
-      <li :class="timeM">44</li>
-      <li :class="timeS">45</li>
+  <div class="el_right">
+    <div class="el_timeTxt">距结束</div>
+    <ul class="el_btg_time">
+      <li class="el_timeDay">{{ $store.state.day }}天</li>
+      <li class="el_timeH">{{ $store.state.hour }}</li>
+      <li class="el_timeM">{{ $store.state.minute }}</li>
+      <li class="el_timeS">{{ $store.state.second }}</li>
     </ul>
     <nuxt/>
   </div>
@@ -14,24 +14,23 @@
 export default {
   data () {
     return {
-      rights: 'el_right',
-      timeall: 'el_timeall',
-      timeTxt: 'el_timeTxt',
-      btg_time: 'el_btg_time',
-      timeDay: 'el_timeDay',
-      timeH: 'el_timeH',
-      timeM: 'el_timeM',
-      timeS: 'el_timeS'
+
+    }
+  },
+  mounted () {
+    this.start()
+  },
+  methods: {
+    start: function () {
+      this.$store.commit('increment')
     }
   }
 }
 </script>
 <style>
-  .el_timeall {
+  .el_right {
     padding: 18px 28px 18px 0;
     float: right;
-    /*filter: blur(15px);*/
-    /*-webkit-filter: blur(15px);*/
   }
   .el_timeTxt {
     display: inline-block;
