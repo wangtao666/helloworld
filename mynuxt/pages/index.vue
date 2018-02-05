@@ -189,7 +189,7 @@
           this.data1 = true
           this.data2 = true
         } else if (e.target.innerText === '参团') {
-          location.href = 'participate'
+          location.href = '/participate'
         } else {
           location.href = '/myGroups'
         }

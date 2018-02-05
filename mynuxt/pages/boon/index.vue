@@ -97,7 +97,6 @@
           for(let name in getclass.data) {
             names.push(name)
           }
-          console.log('2222222222222222:', getclass.data)
           // 上面请求都完成后，才执行这个回调方法
           return {
             // 头部导航内容

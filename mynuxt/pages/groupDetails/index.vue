@@ -64,7 +64,7 @@
         <div class="abstract absattr">商品详情</div>
         <div class="edit" id="goodscontent">
           <p style="font-size: 0" v-for="(item, index) in imgurl" :key="index">
-            <img :src="item" alt="">
+            <img v-lazy="item" alt="22222">
           </p>
         </div>
       </div>
@@ -199,5 +199,11 @@
   #wrap>div:first-child{
     filter: blur(15px);
     -webkit-filter: blur(15px);
+  }
+  img[lazy=loading] {
+    background-image: url("../../assets/images/lay_load.png");
+    width: 750px;
+    height: 400px;
+    margin: auto;
   }
 </style>
