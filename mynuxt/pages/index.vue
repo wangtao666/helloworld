@@ -1,42 +1,49 @@
 <template>
   <div id="box">
     <div id="baner">
-      <div :class="banner">
-        <div :class="inform" @click="seeinform">活动详情>></div>
+      <div class="el_banner">
+        <div class="el_inform" @click="seeinform">活动详情>></div>
       </div>
     </div>
     <Times></Times>
-    <div :class="navs" id="navs">
-      <ul :class="clear" ref="mybox">
+    <div class="el_navs" id="navs">
+      <ul class="clear" ref="mybox">
         <li :class="{active: active == index}" @click="check(index, item.id)" v-for='(item, index) in clas' :key="index">{{ item.categoryName }}</li>
       </ul>
     </div>
-    <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
-      <div id="goods">
-        <div v-for="(item, index) in goodss" :class="goods" @click="goDetail">
-          <div :class="imgs">
-            <img :src="item.goodsPic" alt="">
-          </div>
-          <div :class="bewrite">
-            <ul>
-              <li>{{ item.goodsName }}</li>
-              <li>团长价:
-                <span>￥</span>
-                <span>{{ item.salesPrice }}</span>
-              </li>
-              <li>
-                拼团价：
-                <span>￥</span>
-                <span>{{ item.spellPrice }}</span>
-                <span>市场价:<span>￥{{ item.marketPrice}}</span></span>
-              </li>
-            </ul>
+    <div class="main-body">
+      <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" @bottom-status-change="handleBottomChange" :auto-fill="autoFill">
+        <div id="goods">
+          <div v-for="(item, index) in goodss" class="el_goods" @click="goDetail">
+            <div class="el_img">
+              <img :src="item.goodsPic" alt="">
+            </div>
+            <div class="el_bewrite">
+              <ul>
+                <li>{{ item.goodsName }}</li>
+                <li>团长价:
+                  <span>￥</span>
+                  <span>{{ item.salesPrice }}</span>
+                </li>
+                <li>
+                  拼团价：
+                  <span>￥</span>
+                  <span>{{ item.spellPrice }}</span>
+                  <span>市场价:<span>￥{{ item.marketPrice}}</span></span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </mt-loadmore>
-    <div :class="dailog" v-show="data1" ref="dailog">
-      <div :class="window1" v-show="data2">
+        <!--<div slot="bottom" class="mint-loadmore-bottom">-->
+          <!--<span v-show="bottomStatus === 'pull'">{{bottomPullText}}</span>-->
+          <!--<span v-show="bottomStatus === 'drop'">{{bottomDropText}}</span>-->
+          <!--<span v-show="bottomStatus === 'loading'">加载中...</span>-->
+        <!--</div>-->
+      </mt-loadmore>
+    </div>
+    <div class="el_dailog" v-show="data1" ref="dailog">
+      <div class="el_window1" v-show="data2">
         <div class="el_cloose" @click="cloose">x</div>
         <div class="el_explain">
           <p>我想做团长点击“去开团”拼团获取团长专属福利</p>
@@ -47,7 +54,7 @@
           <div @click="cantuan">参团</div>
         </div>
       </div>
-      <div :class="window2" v-show="data3">
+      <div class="el_window2" v-show="data3">
         <div class="el_cloose" @click="cloose">x</div>
         <p class="el_top_font">活动规则</p>
         <p>
@@ -56,7 +63,7 @@
       </div>
     </div>
     <div id="lead">
-      <ul :class="choose">
+      <ul class="el_choose">
         <li>
           <div @click="openwin1">引导</div>
         </li>
@@ -81,32 +88,28 @@
   import filter from '../assets/js/filter'
 //  import request from '../static/api/request'
   import axios from 'axios'
+  import { MessageBox } from 'mint-ui'
   export default {
     name: 'box',
     data () {
       return {
-        goods: 'el_goods',
-        imgs: 'el_img',
-        bewrite: 'el_bewrite',
-        goodss: [],
-        navs: 'el_navs',
-        clear: 'clear',
         active: 0,
         clas: [],
-        dailog: 'el_dailog',
-        window1: 'el_window1',
-        window2: 'el_window2',
         data1: false,
         data2: false,
         data3: false,
-        banner: 'el_banner',
-        inform: 'el_inform',
-        choose: 'el_choose',
         isShow: true,
         show2: true,
         goodss: [],
         alldata: [],
-        allLoaded: false
+        historylist : [],//第一次请求的数据
+        allLoaded: false,//true禁止下拉刷新
+        autoFill: false,//若为真，loadmore 会自动检测并撑满其容器
+        currentpageNum: 1,//当前页数
+        totalNum: 3,//总页数
+        bottomStatus: '',//当前状态
+        bottomPullText: '上拉加载更多...',
+        bottomDropText: '释放更新...'
       }
     },
     async asyncData () {
@@ -116,7 +119,7 @@
         axios.get('http://127.0.0.1:3222/api/getclass')
       ])
         .then(axios.spread(function (reposResp, getclass) {
-          console.log(reposResp.data.choose)
+//          console.log(reposResp.data.choose)
           let names = [];
           // 获得所有对象的名称
           for(let name in getclass.data) {
@@ -166,13 +169,15 @@
         self.isShow = false
         filter.flter('box', false)
       }, Math.random() * 1000)
-      document.getElementsByClassName('mint-loadmore-bottom')[0].innerHTML = '没有更多啦！下拉刷新试试！'
+//      document.getElementsByClassName('mint-loadmore-bottom')[0].innerHTML = '没有更多啦！下拉刷新试试！'
     },
     methods: {
       check: function (e, att) {
         this.active = e
         // 动态的属性名不能用点的，要data[att]这样调用！！！！！！坑！ 因为所有数据都已经请求过来了，所以直接用，不用再发请求!!!
         this.goodss = this.alldata[att]
+        this.allLoaded = false
+        this.currentpageNum = 1
       },
       seeinform: function () {
         this.data1 = true
@@ -184,7 +189,7 @@
         this.data3 = false
       },
       openwin1: function (e) {
-        console.log('123:', e.target.innerText)
+//        console.log('123:', e.target.innerText)
         if (e.target.innerText === '引导') {
           this.data1 = true
           this.data2 = true
@@ -204,31 +209,64 @@
         location.href = 'groupDetails'
       },
       loadTop: function () {
-        // 加载更多数据  可自行写事件(拉到顶部时)
-        this.$refs.loadmore.onTopLoaded();
+        //下拉刷新
         let self = this
-        axios.get('/api/getclass')
-          .then(function(response){
-            // 让当前被选中的导航 在下拉刷新后一样的呈现出当前导航对应的内容
-            let stext = document.getElementsByClassName('active')[0].innerText
-            let curtext = ''
-            for (let i = 0; i<self.clas.length; i++) {
-              if (self.clas[i].categoryName == stext) {
-                curtext = self.clas[i].id
+        this.currentpageNum = 1
+        this.allLoaded = false
+        setTimeout (() => {
+          axios.get('/api/getclass')
+            .then(function(response){
+              // 让当前被选中的导航 在下拉刷新后一样的呈现出当前导航对应的内容
+              let stext = document.getElementsByClassName('active')[0].innerText
+              let curtext = ''
+              for (let i = 0; i<self.clas.length; i++) {
+                if (self.clas[i].categoryName == stext) {
+                  curtext = self.clas[i].id
+                }
               }
-            }
-            // JSON.parse() 字符串转json格式
-            self.goodss = response.data[curtext]
-            console.log('22222222222:', response.data[curtext])
-          })
-          .catch(function(err){
-            console.log(err);
-          });
+              self.goodss = response.data[curtext]
+              self.$refs.loadmore.onTopLoaded()
+            })
+            .catch(function(err){
+              console.log(err)
+            })
+        }, 500)
       },
       loadBottom: function () {
         // 加载更多数据 加载完成时的事件
-        this.allLoaded = true;// 若数据已全部获取完毕
-        this.$refs.loadmore.onBottomLoaded();
+        this.currentpageNum++
+//        console.log('this.current1:', this.currentpageNum)
+        let self = this
+        setTimeout(() => {
+          axios.get('/api/getclass')
+            .then(function(response){
+              // 让当前被选中的导航 在下拉刷新后一样的呈现出当前导航对应的内容
+              let stext = document.getElementsByClassName('active')[0].innerText
+              let curtext = ''
+              if (self.totalNum  >= self.currentpageNum) {
+                for (let i = 0; i<self.clas.length; i++) {
+                  if (self.clas[i].categoryName == stext) {
+                    curtext = self.clas[i].id
+                  }
+                }
+                for (let j = 0; j < response.data[curtext].length; j++){
+                  // 将得到的数据循环后单个push到之前的数组中去
+                  self.goodss.push(response.data[curtext][j])
+                }
+              } else {
+                self.allLoaded = true
+                MessageBox.alert('已经加载完全部内容', '')
+              }
+              // 这一步很重要  不然无法实时切换loading状态 到 pull的状态
+              self.$refs.loadmore.onBottomLoaded()
+            })
+            .catch(function(err){
+              console.log(err)
+            })
+        }, 500)
+      },
+      handleBottomChange: function (status){
+        this.bottomStatus = status;//实时更新上拉状态
       }
     }
 }
