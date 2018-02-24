@@ -8,7 +8,7 @@
 		</section>
 		<div class="content">
 
-			<underWay :is="currentTab"  keep-alive></underWay>
+			<underWay :is="currentTab"  :fightData='fightData' keep-alive></underWay>
 
 		</div>
 	</div>
@@ -38,10 +38,16 @@
           {"name":"参团成功","group":"offeredSuccess"},
           {"name":"参团失败","group":"collageFailure"}
         ],
-        "indexGroup":"0"
+        "indexGroup":"0",
+        fightData:''
 
 			}
 		},
+    async asyncData() {
+          	let res = await api.post('/getspellList1',{"myAllSpell":2})
+			    	return { fightData:res.data}
+
+    },
 		methods: {
 			toggleTab(tab, $index) {
         this.currentTab = tab;

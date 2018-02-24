@@ -9,7 +9,7 @@
 		<div class="content">
 			<!--子组件，显示不同的 tab   is 特性动态绑定子组件    keep-alive 将切换出去的组件保留在内存中-->
 			<!--拼团进行中-->
-			<underWay :is="currentTab" :hide='hide' :hideBtn='hideBtn' keep-alive></underWay>
+			<underWay :is="currentTab" :fightData='fightData' :hide='hide' :hideBtn='hideBtn' keep-alive></underWay>
 			<!--拼团成功-->
 			<!--<fightSuccess/>-->
 		</div>
@@ -43,17 +43,31 @@
           {"name":"拼团成功","group":"fightSuccess"},
           {"name":"拼团失败","group":"collageFailure"},
           {"name":"拼团完成","group":"collageFull"}],
-        "indexGroup":"0"
+        "indexGroup":"0",
+        fightData:''
 			}
 		},
 		async asyncData() {
-
-		},
+      let res = await api.get('/getspellList',{"myAllSpell":1})
+      return { fightData:res.data}
+    },
 		methods: {
 			toggleTab(tab, $index) {
-				this.currentTab = tab; // tab 为当前触发标签页的组件名
-        this.indexGroup = $index;
-
+          this.currentTab = tab; // tab 为当前触发标签页的组件名
+          this.indexGroup = $index;
+          if($index==1){
+  //           	拼团成功
+            api.get('/getspellListSucc').then(({ data }) => {
+              console.log("this.fightData", data)
+              this.fightData=data
+            })
+          }else if($index==2){
+  //           	拼团失败
+            api.get('/getspellListFail').then(({ data }) => {
+              console.log("this.fightData", data)
+              this.fightData=data
+            })
+          }
 			}
 		}
 
