@@ -199,7 +199,6 @@
   #wrap>div:first-child{
     filter: blur(15px);
     -webkit-filter: blur(15px);
-    height: 750px;
   }
   img[lazy=loading] {
     background-image: url("../../assets/images/lay_load.png");
