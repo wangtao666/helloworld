@@ -6,10 +6,10 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'demo',
+    title: 'mynuxt',
     meta: [
       { charset: 'utf-8' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      { hid: 'description', name: 'viewport', content: 'width=750,user-scalable=no,target-densitydpi=device-dpi' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
