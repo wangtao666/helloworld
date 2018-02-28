@@ -53,5 +53,5 @@
 
 <style>
 @import "../../assets/css/base.css";
-@import "../../static/css/myGroups.css";
+@import "../../assets/css/myGroups.css";
 </style>

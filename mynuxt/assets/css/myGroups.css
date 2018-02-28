@@ -54,9 +54,9 @@
 }
 
 /*每一个拼团的信息*/
-.everyGroup{
-    display: none;
-}
+/*.everyGroup{*/
+    /*display: none;*/
+/*}*/
 .everyGroup:first-child{
     display: block;
 }
@@ -121,9 +121,15 @@
 .leftPerson{
     width: auto;
     height: 100%;
-    display: table-cell;
-    vertical-align: middle;
+  display: flex;
+  align-items: center;
 
+}
+.groupName{
+  margin-left: 18px;
+}
+.payState{
+  padding-right: 8px
 }
 .personImg{
     width: 73px;
@@ -288,6 +294,11 @@
     text-align: center;
     line-height: 96px;
     background: #da451f;
+}
+.groupHead{
+ position: absolute;
+ bottom: 0;
+ left: 0;
 }
 /*图文详情*/
 .d_switch{height: 60px;}

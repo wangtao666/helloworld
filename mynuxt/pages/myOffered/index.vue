@@ -19,6 +19,7 @@
 	import underWay from '../../components/myGroups/underWay'
 	import offeredSuccess from '../../components/myGroups/offeredSuccess'
 	import collageFailure from '../../components/myGroups/collageFailure'
+	import api from '../../assets/api/request.js'
 	export default {
 		name: 'fightGroups',
 		components: {
@@ -44,7 +45,7 @@
 			}
 		},
     async asyncData() {
-          	let res = await api.post('/getspellList1',{"myAllSpell":2})
+          	let res = await api.post('/spell/getMyJoin',{"myAllSpell":2})
 			    	return { fightData:res.data}
 
     },

@@ -7,20 +7,21 @@
       </div>
       </section>
 		<div class="content">
-          <div slot="top" class="mint-loadmore-top">
-            <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">刷新</span>
-            <span v-show="topStatus === 'loading'">加载中...</span>
-          </div>
-          <!--子组件，显示不同的 tab   is 特性动态绑定子组件    keep-alive 将切换出去的组件保留在内存中-->
-          <!--拼团进行中-->
-          <underWay :is="currentTab" :fightData='fightData' :hide='hide' :hideBtn='hideBtn' keep-alive></underWay>
-          <!--拼团成功-->
-          <!--<fightSuccess/>-->
-          <div slot="bottom" class="mint-loadmore-bottom">
-            <span v-show="bottomStatus !== 'loading'" :class="{ 'rotate': bottomStatus === 'drop' }">释放后加载</span>
-            <span v-show="bottomStatus === 'loading'">加载中...</span>
-          </div>
-
+            <mt-loadmore  :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" :auto-fill="false" ref="loadmore" @top-status-change="handleTopChange" @bottom-status-change="handleBottomChange">
+                          <div slot="top" class="mint-loadmore-top">
+                            <span v-show="topStatus !== 'loading'" :class="{ 'rotate': topStatus === 'drop' }">刷新</span>
+                            <span v-show="topStatus === 'loading'">加载中...</span>
+                          </div>
+                          <!--子组件，显示不同的 tab   is 特性动态绑定子组件    keep-alive 将切换出去的组件保留在内存中-->
+                          <!--拼团进行中-->
+                          <underWay :is="currentTab" :fightData='fightData' :hide='hide' :hideBtn='hideBtn' keep-alive></underWay>
+                          <!--拼团成功-->
+                          <!--<fightSuccess/>-->
+                          <div slot="bottom" class="mint-loadmore-bottom">
+                            <span v-show="bottomStatus !== 'loading'" :class="{ 'rotate': bottomStatus === 'drop' }">释放后加载</span>
+                            <span v-show="bottomStatus === 'loading'">加载中...</span>
+                          </div>
+             </mt-loadmore>
 		</div>
 	</div>
 </template>
@@ -32,6 +33,7 @@
 	import fightSuccess from '../../components/myGroups/fightSuccess'
 	import collageFailure from '../../components/myGroups/collageFailure'
 	import collageFull from '../../components/myGroups/collageFull'
+	import api from '../../assets/api/request.js'
 	export default {
 		name: 'box',
 		components: {
@@ -64,26 +66,27 @@
 			}
 		},
 		async asyncData() {
-      let res = await api.get('/getspellList',{"myAllSpell":1})
+      let res = await api.get('/spell/getMyJoin')
       return { fightData:res.data}
     },
 		methods: {
 			toggleTab(tab, $index) {
           this.currentTab = tab; // tab 为当前触发标签页的组件名
           this.indexGroup = $index;
-          if($index==1){
-  //           	拼团成功
-            api.get('/getspellListSucc').then(({ data }) => {
-              console.log("this.fightData", data)
-              this.fightData=data
-            })
-          }else if($index==2){
-  //           	拼团失败
-            api.get('/getspellListFail').then(({ data }) => {
-              console.log("this.fightData", data)
-              this.fightData=data
-            })
-          }
+          console.log(this.currentTab)
+  //         if($index==1){
+  // //           	拼团成功
+  //           api.get('/getspellListSucc').then(({ data }) => {
+  //             console.log("this.fightData", data)
+  //             this.fightData=data
+  //           })
+  //         }else if($index==2){
+  // //           	拼团失败
+  //           api.get('/getspellListFail').then(({ data }) => {
+  //             console.log("this.fightData", data)
+  //             this.fightData=data
+  //           })
+  //         }
 			},
       //			分页查询(加载更多)
       handleTopChange(status) {
