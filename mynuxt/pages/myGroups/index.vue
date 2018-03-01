@@ -33,7 +33,7 @@
 	import fightSuccess from '../../components/myGroups/fightSuccess'
 	import collageFailure from '../../components/myGroups/collageFailure'
 	import collageFull from '../../components/myGroups/collageFull'
-	import api from '../../assets/api/request.js'
+  import axios from 'axios'
 	export default {
 		name: 'box',
 		components: {
@@ -66,7 +66,7 @@
 			}
 		},
 		async asyncData() {
-      let res = await api.get('/spell/getMyJoin')
+      let res = await axios.get('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin')
       return { fightData:res.data}
     },
 		methods: {
@@ -76,13 +76,13 @@
           console.log(this.currentTab)
   //         if($index==1){
   // //           	拼团成功
-  //           api.get('/getspellListSucc').then(({ data }) => {
+  //           axios.get('/getspellListSucc').then(({ data }) => {
   //             console.log("this.fightData", data)
   //             this.fightData=data
   //           })
   //         }else if($index==2){
   // //           	拼团失败
-  //           api.get('/getspellListFail').then(({ data }) => {
+  //           axios.get('/getspellListFail').then(({ data }) => {
   //             console.log("this.fightData", data)
   //             this.fightData=data
   //           })
@@ -112,7 +112,7 @@
       },
       loadPageList:function(currentPage){
         this.paging.currentPage=currentPage;
-        api.get  ('/msg1.json',{"currentPage":this.paging.currentPage}).then(({ data }) => {
+        axios.get  ('/msg1.json',{"currentPage":this.paging.currentPage}).then(({ data }) => {
 
           if(this.paging.currentPage==0){
             this.fightData=data;

@@ -19,7 +19,7 @@
 	import underWay from '../../components/myGroups/underWay'
 	import offeredSuccess from '../../components/myGroups/offeredSuccess'
 	import collageFailure from '../../components/myGroups/collageFailure'
-	import api from '../../assets/api/request.js'
+  import axios from 'axios'
 	export default {
 		name: 'fightGroups',
 		components: {
@@ -45,7 +45,7 @@
 			}
 		},
     async asyncData() {
-          	let res = await api.post('/spell/getMyJoin',{"myAllSpell":2})
+          	let res = await axios.post('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin',{"myAllSpell":2})
 			    	return { fightData:res.data}
 
     },
