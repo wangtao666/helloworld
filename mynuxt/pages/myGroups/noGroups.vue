@@ -5,12 +5,12 @@
 			<div class="noTxt">
 				<p>您好，您目前占未参与拼团活动</p>
 				 <p>请点击下方按钮，开启拼团抢优惠之旅。</p>
-				
+
 			</div>
 			<div class='groupFoot'>
 				<nuxt-link to="/about" class='groupBtn'>我要拼团</nuxt-link>
 			</div>
-			 
+
 		</div>
 	</div>
 </template>
@@ -22,22 +22,26 @@
 		data() {
 			return {
 				isA: true,
-				isB: false	
+				isB: false
 			}
 		},
 		components: {
 			'groups': groups
-			
-		}
+
+		},
+    methods: {
+
+    }
 	}
 </script>
 
-<style>
+<style scoped>
 	@import "../../assets/css/base.css";
-	#__nuxt, .warpPage, #wrap{
-		width: 100%;
-		height: 100%;
-	}
+  .warpPage, #wrap{
+    width: 100%;
+    height: 100%;
+    margin-bottom:0;
+  }
 	.content{
 		width: 100%;
 		height:calc(100% - 90px);
@@ -69,7 +73,7 @@
 	    font-size: 30px;
 	    text-align: center;
 	    line-height: 96px;
-	    background: #da451f;	    
+	    background: #da451f;
 	}
-	
+
 </style>

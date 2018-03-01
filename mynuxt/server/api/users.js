@@ -18,6 +18,14 @@ router.get('/getmsg', (req, res, next) => {
   });
 })
 
+router.get('/getData', (req, res, next) => {
+  request('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin', function (error, response, body) {
+    console.log('error:', error) // 返回错误信息
+    console.log('statusCode:', response && response.statusCode) // 返回请求的状态码
+    console.log('body:', body) // 返回回来的数据
+    res.json(body)
+  });
+})
 // 获得分类
 router.get('/gettitle', (req, res, next) => {
   let data2 = Mock.mock({

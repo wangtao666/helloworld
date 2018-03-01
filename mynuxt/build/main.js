@@ -215,6 +215,14 @@ router.get('/getmsg', function (req, res, next) {
   });
 });
 
+router.get('/getData', function (req, res, next) {
+  __WEBPACK_IMPORTED_MODULE_1_request___default()('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin', function (error, response, body) {
+    console.log('error:', error); // 返回错误信息
+    console.log('statusCode:', response && response.statusCode); // 返回请求的状态码
+    console.log('body:', body); // 返回回来的数据
+    res.json(body);
+  });
+});
 // 获得分类
 router.get('/gettitle', function (req, res, next) {
   var data2 = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
