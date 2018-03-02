@@ -3,40 +3,51 @@
 		<groups :isA='isA' :isB='isB' />
 		<div class="content">
 			<div class="noTxt">
-				<p>您好，您目前占未参与参团活动</p>
+				<p  @click="one()">您好，您目前占未参与参团活动</p>
 				<p>请点击下方按钮，开启参团抢优惠之旅。</p>
-				
+
 			</div>
 			<div class='groupFoot'>
 				<nuxt-link to="/about" class='groupBtn'>我要参团</nuxt-link>
 			</div>
-			 
+
 		</div>
 	</div>
 </template>
 
 <script>
 	import groups from '../../components/myGroups/groups'
+  import axios from 'axios'
 	export default {
 		name: 'noGroups',
 		data() {
 			return {
 				isA: false,
-				isB: true	
+				isB: true
 			}
 		},
 		components: {
 			'groups': groups
-			
-		}
+
+		},
+    methods: {
+      one(){
+        axios.post('http://localhost:3222/api/getData',{"name":"jiaxiaoyan"}).then(({ data }) => {
+          console.log("this.data", data)
+//             	 this.fightData=data
+        })
+      }
+    }
 	}
+
 </script>
 
-<style>
+<style scoped>
 	@import "../../assets/css/base.css";
-	#__nuxt, .warpPage, #wrap{
+  .warpPage, #wrap{
 		width: 100%;
 		height: 100%;
+    margin-bottom:0;
 	}
 	.content{
 		width: 100%;
@@ -69,7 +80,7 @@
 	    font-size: 30px;
 	    text-align: center;
 	    line-height: 96px;
-	    background: #da451f;	    
+	    background: #da451f;
 	}
-	
+
 </style>

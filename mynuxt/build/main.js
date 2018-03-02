@@ -65,7 +65,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -128,7 +128,7 @@ module.exports = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users__ = __webpack_require__(7);
 
 
 
@@ -144,21 +144,27 @@ router.use(__WEBPACK_IMPORTED_MODULE_1__users__["a" /* default */]);
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(9);
+module.exports = __webpack_require__(10);
 
 
 /***/ },
 /* 4 */
 /***/ function(module, exports) {
 
-module.exports = require("nuxt");
+module.exports = require("body-parser");
 
 /***/ },
 /* 5 */
+/***/ function(module, exports) {
+
+module.exports = require("nuxt");
+
+/***/ },
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 //链接 mongoose nuxt集合
-var mongoose = __webpack_require__(8);
+var mongoose = __webpack_require__(9);
 var db = mongoose.createConnection('mongodb://localhost:27017/mynuxt');
 //链接错误
 db.on('error', function (err) {
@@ -183,17 +189,17 @@ exports.db = db;
 console.log('数据库启动成功！！！！');
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_request__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_request__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_request___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_request__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mockjs__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mockjs__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mockjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_mockjs__);
 
 
@@ -204,7 +210,6 @@ var nuxtlist = __WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver___default.a.nuxtlist;
 var tslist = __WEBPACK_IMPORTED_MODULE_2__db_nuxtserrver___default.a.tslist;
 
 var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
-
 // 接口转发测试
 router.get('/getmsg', function (req, res, next) {
   __WEBPACK_IMPORTED_MODULE_1_request___default()('http://10.10.1.191:3666/getall', function (error, response, body) {
@@ -215,14 +220,6 @@ router.get('/getmsg', function (req, res, next) {
   });
 });
 
-router.get('/getData', function (req, res, next) {
-  __WEBPACK_IMPORTED_MODULE_1_request___default()('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin', function (error, response, body) {
-    console.log('error:', error); // 返回错误信息
-    console.log('statusCode:', response && response.statusCode); // 返回请求的状态码
-    console.log('body:', body); // 返回回来的数据
-    res.json(body);
-  });
-});
 // 获得分类
 router.get('/gettitle', function (req, res, next) {
   var data2 = __WEBPACK_IMPORTED_MODULE_3_mockjs___default.a.mock({
@@ -422,45 +419,59 @@ router.get('/gettest', function (req, res, next) {
   res.json(data);
 });
 
+router.post('/getData', function (req, res, next) {
+  var name = req.body.name;
+  console.log(name);
+  /**设置响应头允许ajax跨域访问**/
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  /*星号表示所有的异域请求都可以接受，*/
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST");
+  __WEBPACK_IMPORTED_MODULE_1_request___default()('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin', function (error, response, body) {
+    console.log('body:', body); // 返回回来的数据
+    res.send(body);
+  });
+});
 /* harmony default export */ exports["a"] = router;
-
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-module.exports = require("mockjs");
 
 /***/ },
 /* 8 */
 /***/ function(module, exports) {
 
-module.exports = require("mongoose");
+module.exports = require("mockjs");
 
 /***/ },
 /* 9 */
 /***/ function(module, exports) {
 
-module.exports = require("regenerator-runtime");
+module.exports = require("mongoose");
 
 /***/ },
 /* 10 */
 /***/ function(module, exports) {
 
-module.exports = require("request");
+module.exports = require("regenerator-runtime");
 
 /***/ },
 /* 11 */
+/***/ function(module, exports) {
+
+module.exports = require("request");
+
+/***/ },
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_E_newWeb_helloworld_mynuxt_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_E_newWeb_helloworld_mynuxt_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_E_newWeb_helloworld_mynuxt_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nuxt__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_body_parser__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_body_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_body_parser__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__api__ = __webpack_require__(2);
 
 
 // Start nuxt.js
@@ -536,9 +547,12 @@ var host = process.env.HOST;
 var port = process.env.PORT || 3000;
 
 app.set('port', port);
-
+// 解析 application/x-www-form-urlencoded
+app.use(__WEBPACK_IMPORTED_MODULE_3_body_parser___default.a.urlencoded({ extended: false }));
+// 解析 application/json
+app.use(__WEBPACK_IMPORTED_MODULE_3_body_parser___default.a.json());
 // Import API Routes
-app.use('/api', __WEBPACK_IMPORTED_MODULE_3__api__["a" /* default */]);
+app.use('/api', __WEBPACK_IMPORTED_MODULE_4__api__["a" /* default */]);
 
 start();
 

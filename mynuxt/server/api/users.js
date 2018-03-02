@@ -6,8 +6,8 @@ let Random = Mock.Random
 let nuxtlist = nuxtSchema.nuxtlist
 let tslist = nuxtSchema.tslist
 
-let router = Router()
 
+let router = Router()
 // 接口转发测试
 router.get('/getmsg', (req, res, next) => {
   request('http://10.10.1.191:3666/getall', function (error, response, body) {
@@ -18,14 +18,6 @@ router.get('/getmsg', (req, res, next) => {
   });
 })
 
-router.get('/getData', (req, res, next) => {
-  request('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin', function (error, response, body) {
-    console.log('error:', error) // 返回错误信息
-    console.log('statusCode:', response && response.statusCode) // 返回请求的状态码
-    console.log('body:', body) // 返回回来的数据
-    res.json(body)
-  });
-})
 // 获得分类
 router.get('/gettitle', (req, res, next) => {
   let data2 = Mock.mock({
@@ -229,4 +221,18 @@ router.get('/gettest', (req, res, next) => {
   res.json(data)
 })
 
+
+
+router.post('/getData', (req, res, next) => {
+  var name = req.body.name
+  console.log(name);
+  /**设置响应头允许ajax跨域访问**/
+  res.setHeader("Access-Control-Allow-Origin","*");
+  /*星号表示所有的异域请求都可以接受，*/
+  res.setHeader("Access-Control-Allow-Methods","GET,POST");
+  request('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin', function (error, response, body) {
+    console.log('body:', body) // 返回回来的数据
+    res.send(body)
+  });
+})
 export default router

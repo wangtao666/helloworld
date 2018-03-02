@@ -1,6 +1,6 @@
 import Nuxt from 'nuxt'
 import express from 'express'
-
+import bodyParser from 'body-parser'
 import api from './api'
 
 const app = express()
@@ -8,10 +8,12 @@ const host = process.env.HOST
 const port = process.env.PORT || 3000
 
 app.set('port', port)
-
+// 解析 application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended:false}));
+// 解析 application/json
+app.use(bodyParser.json());
 // Import API Routes
 app.use('/api', api)
-
 // Start nuxt.js
 async function start () {
   // Import and Set Nuxt.js options
