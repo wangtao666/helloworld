@@ -34,6 +34,7 @@
 	import collageFailure from '../../components/myGroups/collageFailure'
 	import collageFull from '../../components/myGroups/collageFull'
   import axios from 'axios'
+  import { countDown } from '../../assets/js/time'
 	export default {
 		name: 'box',
 		components: {
@@ -65,9 +66,16 @@
         bottomStatus:''
 			}
 		},
-		async asyncData() {
-      let res = await axios.get('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin')
-      return { fightData:res.data}
+		async asyncData({ params }, callback) {
+      axios.post('http://localhost:3222/api/myGroups',{"state":1})
+         .then((data) => {
+           let  res=data.data;
+            callback(null, { fightData:res })
+
+         })
+         .catch((e) => {
+		      callback({ statusCode: 404, message: 'Post not found' })
+		    })
     },
 		methods: {
 			toggleTab(tab, $index) {
@@ -91,8 +99,6 @@
       //			分页查询(加载更多)
       handleTopChange(status) {
         this.topStatus = status;
-
-        console.log("status", this.topStatus)
       },
       handleBottomChange(status){
         this.bottomStatus=status
@@ -130,8 +136,13 @@
           }
         })
       }
-		}
-
+		},
+    created (){
+      // console.log('created',this.starttime)
+    },
+    mounted(){
+   // console.log('mounted',this.starttime)
+    }
 	}
 </script>
 

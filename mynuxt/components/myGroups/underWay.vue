@@ -5,17 +5,20 @@
             <section class="itemGroup">
                   <div class="groupMsg clean">
                       <div class="leftImg _left">
-                          <img src="../../assets/shoes.jpg" alt="商品"/>
+                          <img :src="item.smPic " alt="商品"/>
                       </div>
                       <div class="rightText _left">
                           <p class="groupTitle">{{item.title}}</p>
-                          <p class="groupTime">倒计时：12:00:00:00</p>
+                          <p class="groupTime">
+                            倒计时：
+                            <counter :endtime='item.endTime'></counter>
+                          </p>
                           <p class="groupPrice" v-if="hide">
-                                <i class="g-red">20</i>
-                                                          人已支付/已消费 <i class="g-red">2000034</i> 元
+                                <i class="g-red">{{item.payCount}}</i>
+                                                          人已支付/已消费 <i class="g-red">{{item.amountCount}}</i> 元
                           </p>
                            <p class="groupHead" v-else>
-                                <i class="g-red">团长：贾小燕</i>
+                                <i class="g-red">团长：{{item.nickName}}</i>
 
                           </p>
 
@@ -25,16 +28,16 @@
                   </section>
                   <div class="itemPerson borderBox clean" v-if="hide">
                          <div class="leftPerson _left">
-                             <img class="personImg" src="../../assets/shoes.jpg" alt=""/>
-                             <span class="groupName">第一个人</span>
+                             <img class="personImg" :src=" item.memberPay.photo" alt="头像"/>
+                             <span class="groupName">{{item.memberPay.nickName}}</span>
                          </div>
                           <div class="rightPrice _right">
                             <!--此处是判断是否是支付了-->
                                 <em class="color999 payState" v-if="item.state==1" state="item.state">未支付</em>
                                 <em class="color999 payState" v-else>已支付</em>
-                                  <i class="g-red">￥520</i>
+                                  <i class="g-red">￥{{item.memberPay.amount}}</i>
                           </div>
-                      </div>
+                  </div>
 
                   <div class="payment clean" v-if="hide">
                           <a class="payBtn _right" href="javascript:;">提前购买</a>
@@ -44,20 +47,30 @@
          </div>
 	</div>
 </template>
-
 <script>
+  import counter from './counter.vue';
 export default {
 		  name: 'underWay',
       props:["hide","fightData"],
+      components:{
+        'counter':counter
+      },
 		  data () {
 		      return {
-
+            endTime:' '
 		      }
 		  },
 		    methods:{
 
+		    },
+          mounted () {
 
-		    }
+
+          },
+        computed(){
+
+        }
+
     }
 </script>
 

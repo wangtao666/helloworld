@@ -421,13 +421,26 @@ router.get('/gettest', function (req, res, next) {
 
 router.post('/getData', function (req, res, next) {
   var name = req.body.name;
-  console.log(name);
+  console.log('name:', name);
   /**设置响应头允许ajax跨域访问**/
   res.setHeader("Access-Control-Allow-Origin", "*");
   /*星号表示所有的异域请求都可以接受，*/
   res.setHeader("Access-Control-Allow-Methods", "GET,POST");
   __WEBPACK_IMPORTED_MODULE_1_request___default()('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin', function (error, response, body) {
-    console.log('body:', body); // 返回回来的数据
+
+    res.send(body);
+  });
+});
+// 我的拼团
+router.post('/myGroups', function (req, res, next) {
+  var state = req.body.state;
+  var data = { "state": state };
+  // 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+  var headers = { 'content-type': 'application/json;charset=UTF-8' };
+  var timeout = 0.001;
+  __WEBPACK_IMPORTED_MODULE_1_request___default()('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin', data = data, function (error, response, body) {
+    // console.log("myGroups:",body)
+    console.log("data:", data);
     res.send(body);
   });
 });
