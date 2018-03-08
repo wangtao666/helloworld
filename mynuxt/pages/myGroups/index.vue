@@ -70,7 +70,7 @@
       axios.post('http://localhost:3222/api/myGroups',{"state":1})
          .then((data) => {
            let  res=data.data;
-            callback(null, { fightData:res })
+            callback(null, { fightData:res.data })
 
          })
          .catch((e) => {
@@ -81,20 +81,27 @@
 			toggleTab(tab, $index) {
           this.currentTab = tab; // tab 为当前触发标签页的组件名
           this.indexGroup = $index;
-          console.log(this.currentTab)
-  //         if($index==1){
-  // //           	拼团成功
-  //           axios.get('/getspellListSucc').then(({ data }) => {
-  //             console.log("this.fightData", data)
-  //             this.fightData=data
-  //           })
-  //         }else if($index==2){
-  // //           	拼团失败
-  //           axios.get('/getspellListFail').then(({ data }) => {
-  //             console.log("this.fightData", data)
-  //             this.fightData=data
-  //           })
-  //         }
+              if($index==0){
+//拼团进行中
+                    axios.post('http://localhost:3222/api/myGroups',{"state":1}).then(({ data }) => {
+                           this.fightData=data.data
+                     })
+              }else if($index==1){
+           //           	拼团成功
+                       axios.post('http://localhost:3222/api/myGroups',{"state":2}).then(({ data }) => {
+                            this.fightData=data.data
+                      })
+              }else if($index==2){
+                //           	拼团失败
+                       axios.post('http://localhost:3222/api/myGroups',{"state":3}).then(({ data }) => {
+                           this.fightData=data.data
+                       })
+              }else {
+                //           	拼团完成
+                      axios.post('http://localhost:3222/api/myGroups',{"state":4}).then(({ data }) => {
+                            this.fightData=data.data
+                      })
+              }
 			},
       //			分页查询(加载更多)
       handleTopChange(status) {

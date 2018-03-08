@@ -1,16 +1,26 @@
 <template>
 	<div>
-		 <div class="everyGroup groupsTwo">
+		 <div class="everyGroup groupsTwo" v-for="(item,$index) in fightData.content">
             <section class="itemGroup">
                 <div class="groupMsg clean">
                     <div class="leftImg _left">
-                        <img src="../../assets/shoes.jpg" alt="商品"/>
+                        <img :src="item.smPic " alt="商品"/>
                     </div>
                     <div class="rightText _left">
-                        <p class="groupTitle">全友家居 我的家呀全友家居很好全友家居很好全友家居很好全友家居很好全友家居很好全友家居很好</p>
-                        <p class="groupTime">倒计时：12:00:00:00</p>
+                        <p class="groupTitle">{{item.title}}</p>
+
+                        <p class="groupTime">倒计时：
+                          <counter :endtime='item.endTime'></counter>
+                        </p>
+
                         <p class="groupPrice">
-                            <i class="g-red">20</i>人已支付/已消费 <i class="g-red">2000034</i> 元
+                                  <!--此处是判断拼团的条件是人还是钱-->
+                                  <span v-if=" item.spellRule. headConditionWay==1">
+                                                <i class="g-red">{{item.payCount}}</i>人已支付
+                                        </span>
+                                  <span v-else>
+                                                已消费 <i class="g-red">{{item.amountCount}}</i>
+                                   </span>
                         </p>
                     </div>
                 </div>
@@ -27,6 +37,20 @@
 </template>
 
 <script>
+  import counter from './counter.vue';
+
+  export default {
+    name: 'fightSuccess',
+    props:["fightData"],
+    components:{
+      'counter':counter
+    },
+    data () {
+      return {
+      }
+    }
+
+  }
 </script>
 
 <style>

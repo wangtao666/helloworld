@@ -1,7 +1,7 @@
 <template>
 	<!--拼团进行中-->
 	<div>
-		  <div class="everyGroup groupsOne " v-for="(item,$index) in fightData.data.content">
+		  <div class="everyGroup groupsOne " v-for="(item,$index) in fightData.content">
             <section class="itemGroup">
                   <div class="groupMsg clean">
                       <div class="leftImg _left">
@@ -14,8 +14,13 @@
                             <counter :endtime='item.endTime'></counter>
                           </p>
                           <p class="groupPrice" v-if="hide">
-                                <i class="g-red">{{item.payCount}}</i>
-                                                          人已支付/已消费 <i class="g-red">{{item.amountCount}}</i> 元
+                                <!--此处是判断拼团的条件是人还是钱-->
+                                <span v-if=" item.spellRule. headConditionWay==1">
+                                        <i class="g-red">{{item.payCount}}</i>人已支付
+                                </span>
+                                <span v-else>
+                                        已消费 <i class="g-red">{{item.amountCount}}</i>
+                                </span>
                           </p>
                            <p class="groupHead" v-else>
                                 <i class="g-red">团长：{{item.nickName}}</i>
@@ -24,7 +29,9 @@
 
                       </div>
                   </div>
-                  <section class="msgSign borderBox" v-if="hide">成功邀约510人购买享受6折优惠/团内消费达到1000元享3折优
+                  <section class="msgSign borderBox" v-if="hide">
+                          <span v-if=" item.spellRule.headConditionWay==1">成功邀约{{item.spellRule.headConditionNum}}人购买享受{{item.spellRule.headDiscount}}折优惠</span>
+                          <span v-else>团内消费达到{{item.spellRule.headConditionMoney}}元享{{item.spellRule.headDiscount}}折优</span>
                   </section>
                   <div class="itemPerson borderBox clean" v-if="hide">
                          <div class="leftPerson _left">
@@ -33,7 +40,7 @@
                          </div>
                           <div class="rightPrice _right">
                             <!--此处是判断是否是支付了-->
-                                <em class="color999 payState" v-if="item.state==1" state="item.state">未支付</em>
+                                <em class="color999 payState" v-if="item.memberPay.isPayed==0" state="item.memberPay.isPayed">未支付</em>
                                 <em class="color999 payState" v-else>已支付</em>
                                   <i class="g-red">￥{{item.memberPay.amount}}</i>
                           </div>
@@ -59,17 +66,7 @@ export default {
 		      return {
             endTime:' '
 		      }
-		  },
-		    methods:{
-
-		    },
-          mounted () {
-
-
-          },
-        computed(){
-
-        }
+		  }
 
     }
 </script>

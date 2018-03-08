@@ -45,15 +45,28 @@
 			}
 		},
     async asyncData() {
-          	let res = await axios.post('http://172.30.3.40:9086/mockjsdata/5/spell/getMyJoin',{"myAllSpell":2})
-			    	return { fightData:res.data}
+          	let res = await axios.post('http://localhost:3222/api/myGroups',{"state":1})
+			    	return { fightData:res.data.data}
 
     },
 		methods: {
-			toggleTab(tab, $index) {
-        this.currentTab = tab;
-        this.indexGroup = $index;
-			}
+          toggleTab(tab, $index) {
+                  this.currentTab = tab;
+                  this.indexGroup = $index;
+                  if($index==0){
+                            axios.post('http://localhost:3222/api/myGroups',{"state":1}).then(({ data }) => {
+                              this.fightData=data.data
+                            })
+                  }else if($index==1){
+                          axios.post('http://localhost:3222/api/myGroups',{"state":2}).then(({ data }) => {
+                            this.fightData=data.data
+                          })
+                  }else {
+                          axios.post('http://localhost:3222/api/myGroups',{"state":3}).then(({ data }) => {
+                            this.fightData=data.data
+                          })
+                  }
+          }
 		}
 
 	}
